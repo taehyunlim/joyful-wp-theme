@@ -1,0 +1,537 @@
+
+/*---------------------------------------------
+ * Banner / Title / Breadcrumbs
+ *--------------------------------------------*/
+
+$banner-top-space: 6.2em;
+
+#jubilee-banner {
+
+	position: relative;
+	width: 100%;
+	z-index: 6;
+
+	.js & {
+		visibility: hidden; // will fade in with JS on load - softens the Main Color bg flash
+	}
+
+}
+
+.jubilee-header-shape {
+
+	&:not(.jubilee-show-shape) {
+		display: none;
+	}
+
+	position: absolute;
+	bottom: -1px; // prevent line in Firefox
+	right: 0;
+	width: 100%;
+
+	path,
+	polygon {
+		fill: $bg-color;
+	}
+
+	.jubilee-shapes-organic & {
+		height: 2.5vw;
+	}
+
+	.jubilee-shapes-angled & {
+		height: 3vw;
+	}
+
+	.jubilee-single-has-map & {
+		display: none;
+	}
+
+}
+
+	// Darker main color when no image to contract with dropdown menu also having main color background
+
+	#jubilee-banner-darken {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba( 0, 0, 0, 0.07 );
+	}
+
+	// Image overlay
+
+	#jubilee-banner-image {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+
+		// Adjust brightness of image; opacity is set inline
+
+		#jubilee-banner-image-brightness {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #000;
+		}
+
+		// Gradient at top to make breadcrumbs and nav more legible
+
+		.jubilee-has-breadcrumbs .jubilee-banner-image-gradient-top {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.40) 85%, rgba(0,0,0,0.40) 100%);
+		}
+
+		// Only slight gradient at top when no breadcrumb - under menu
+		.jubilee-no-breadcrumbs .jubilee-banner-image-gradient-top {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.25) 85%, rgba(0,0,0,0.25) 100%);
+		}
+
+		// Gradient at bottom over image to make title more legible
+		// This is also used on Prev/Next blocks at bottom of single
+
+		.jubilee-banner-image-gradient {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.30) 85%, rgba(0,0,0,0.30) 100%);
+		}
+
+	#jubilee-banner-inner {
+
+		@extend .jubilee-centered-large; // limit width
+
+		display: block;
+		position: relative; // bring above banner color layer
+		width: 100%;
+		height: 100%;
+		padding: 12.7% 0 10.1% 0; // change below too; make header banner scale according to screen width (when viewport is 1600, height shd be 480 - since image is 1600x480)
+		text-align: center;
+
+		// Less top margin when no image
+
+		.jubilee-no-header-image & {
+
+			$padding-top: 10.25%;
+
+			padding-top: $padding-top;
+			padding-bottom: 7.75%;
+
+			// More space when menu wraps to second line to keep menu from covering title
+
+			.jubilee-header-menu-wrapped & {
+				padding-top: $padding-top + 5%;
+			}
+
+		}
+
+	}
+
+		// Image in front of title (e.g. Person post type)
+
+		$image-by-title-size: ct-em(80);
+		$image-by-title-margin: ct-em(22);
+
+		#jubilee-banner-image-by-title {
+
+			display: inline-block;
+			vertical-align: top;
+
+			// Smaller image when no accent
+
+			width: $image-by-title-size;
+			height: $image-by-title-size;
+
+			margin-top: -$image-by-title-size / 4;
+			position: relative;
+			top: ct-em(10);
+
+			// Image
+
+			img {
+
+				width: 100%;
+				height: auto;
+				margin-top: 2.75em;
+				border-width: 0;
+				border-radius: $image-border-radius;
+
+				.jubilee-shapes-organic & {
+					border-radius: $image-by-title-size;
+				}
+
+				.jubilee-shapes-angled & {
+					border-radius: $image-border-radius-angled;
+				}
+
+			}
+
+		}
+
+		// Title
+
+		#jubilee-banner-title {
+
+			// Make room for image on left
+
+			.jubilee-banner-has-image-by-title & {
+				width: 100%;
+			}
+
+			display: inline-block;
+			height: 100%;
+			text-align: center;
+			vertical-align: top;
+
+			// Move title down when has breadcrumb and archives and is square
+			// This is because the archives move down when square
+
+			.jubilee-shapes-square .jubilee-has-breadcrumbs.jubilee-has-header-archives & {
+				position: relative;
+				top: ct-em(10);
+			}
+
+			// Also move title down when has breadcrumb and no archives
+
+			.jubilee-has-breadcrumbs:not(.jubilee-has-header-archives) & {
+				position: relative;
+				top: ct-em(10);
+			}
+
+			// Move title up when has breadcrumb and archives and is showing location/event map
+			// This is because the archvies dropdown is moved up and not down
+
+			@media only screen and (min-width: 541px) {
+				.jubilee-single-has-map .jubilee-has-breadcrumbs.jubilee-has-header-archives & {
+					position: relative;
+					top: ct-em(-20);
+				}
+			}
+
+			@media only screen and (max-width: 540px) {
+				.jubilee-single-has-map .jubilee-has-breadcrumbs.jubilee-has-header-archives & {
+					position: relative;
+					top: ct-em(0);
+				}
+			}
+
+			div { // Using div instead of H1, because H1 is in <article> as hidden assistive text for proper HTML5 and Outline
+
+ 				@extend .jubilee-text-over-image; // imperceptible shadow to make text contrast with background image
+				@extend .jubilee-constrained-image-content;
+
+				display: block;
+				margin-top: 0.95em; // make room for logo/menu
+				margin-bottom: 0;
+				margin-left: auto;
+				margin-right: auto;
+
+				.jubilee-has-header-image & {
+					text-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+				}
+
+			}
+
+			// Smaller font size based on length to prevent wrapping onto too many lines and stretching height of banner too far
+			// Related: See H1 Header ADjust in _base-elements.scss
+
+			.jubilee-banner-title-length-25 & { // at least 25 characters
+				font-size: 0.9em;
+			}
+
+			.jubilee-banner-title-length-30 & {
+				font-size: 0.85em;
+				padding-top: ct-em(10);
+			}
+
+			.jubilee-banner-title-length-35 & {
+				font-size: 0.8em;
+				padding-top: ct-em(18);
+			}
+
+			.jubilee-banner-title-length-40 & { // 40 characters or greater - now let it wrap at this small size
+				font-size: 0.75em;
+				padding-top: ct-em(15);
+			}
+
+		}
+
+	// Breadcrumbs and Archive Dropdowns
+
+	#jubilee-banner-top {
+		position: absolute;
+		top: $banner-top-space;
+		right: 0;
+		width: 100%;
+		border: 1px solid transparent; // keeps spacing correct
+	}
+
+		#jubilee-header-bottom-inner { // .jubilee-centered-large .jubilee-clearfix
+			margin-top: ct-em(10);
+			margin-bottom: ct-em(10);
+		}
+
+			.ctfw-breadcrumbs,
+			#jubilee-header-archives,
+			.jubilee-header-archive-dropdown {
+				display: inline-block;
+				padding: 2px 0;
+				margin-bottom: ct-em(5);
+				font-size: 0.78em;
+			}
+
+			// Breadcrumbs
+
+			.ctfw-breadcrumbs {
+
+				padding: ct-em(9) 0 0 0;
+				float: left;
+				white-space: nowrap;
+
+				.jubilee-shapes-organic & {
+					border-radius: ct-em(24);
+				}
+
+				.jubilee-shapes-angled & {
+					border-radius: $label-border-radius-angled;
+				}
+
+				a {
+
+					color: #fff;
+					transition: all 0.3s;
+
+					&:hover {
+						color: #fff !important;
+					}
+
+				}
+
+			}
+
+				// Separator Icon
+
+				.jubilee-breadcrumb-separator {
+					display: inline-block;
+					color: #ddd;
+					font-size: 1.1em !important;
+					position: relative;
+					top: ct-em(0.5);
+				}
+
+			// Header Archives - Dropdowns
+
+			#jubilee-header-archives { // <ul>
+
+				margin: 0;
+				list-style: none;
+				float: right;
+				padding: ct-em(9) ct-em(8) ct-em(10) ct-em(20);
+				color: $text-color-dark;
+				border-radius: $label-border-radius;
+
+				.jubilee-has-uppercase & {
+					font-size: 0.7em; // smaller when uppercase
+				}
+
+				.jubilee-shapes-organic & {
+					border-radius: ct-em(24);
+				}
+
+				.jubilee-shapes-angled & {
+					border-radius: $label-border-radius-angled;
+				}
+
+				a {
+
+					transition: opacity 0.3s;
+					opacity: 0.85;
+					color: $text-color-dark !important;
+
+					&:hover {
+						opacity: 1;
+					}
+
+				}
+
+			}
+
+				// Top Level Item
+
+				.jubilee-header-archive-top { // <li>
+
+					display: inline-block;
+					margin-right: ct-em(5);
+
+					.jubilee-has-uppercase & {
+						text-transform: uppercase;
+					}
+
+					&:last-child {
+						margin-right: 0;
+					}
+
+				}
+
+					// Section Name
+
+					#jubilee-header-archives-section-name { // .jubilee-header-archive-top-name
+						display: none;
+					}
+
+					// Top Level Item Name
+
+					.jubilee-header-archive-top-name { // <a>
+
+						white-space: nowrap;
+
+						// Down arrow
+
+						.jubilee-icon {
+							font-size: 1.1em !important;
+							position: relative;
+							top: ct-em(0.5);
+							left: ct-em(-1);
+						}
+
+					}
+
+					// Dropdown Container
+
+					.jubilee-header-archive-dropdown { // .jq-dropdown
+
+						display: none;
+						width: ct-em(240);
+						margin-top: ct-em(2);
+						margin-left: ct-em(-17);
+
+						&.jq-dropdown-anchor-right {
+							margin-left: ct-em(14);
+						}
+
+						// Dropdown Panel
+
+						.jq-dropdown-panel {
+							font-size: 1.05em;
+						}
+
+						ul {
+
+							margin: 0;
+							list-style: none;
+							line-height: 1.4;
+
+							li {
+
+								a {
+									display: inline-block;
+									max-width: ct-em(160); // don't let it reach number (enough space for 4-digit #)
+									white-space: nowrap;
+									overflow: hidden;
+									text-overflow: ellipsis; // ... before overflows
+								}
+
+								.jubilee-header-archive-dropdown-count {
+									color: #fff;
+									display: inline-block;
+									float: right;
+								}
+
+
+							}
+
+						}
+
+					}
+
+					// "All" link to index
+
+					.jubilee-header-archive-dropdown-all {
+						a {
+							font-weight: bold;
+						}
+					}
+
+					// Hide count on events since past events makes inaccurate
+					.page-template-events-upcoming .jubilee-header-archive-dropdown-count,
+					.page-template-events-past .jubilee-header-archive-dropdown-count,
+					.tax-ctc_event_category .jubilee-header-archive-dropdown-count {
+						display: none !important;
+					}
+
+// Move breadcrumb and archive dropdowns to top and bottom, centered
+
+#jubilee-banner-top {
+	height: 100%;
+	top: 0;
+	padding-top: $banner-top-space;
+}
+
+	.ctfw-breadcrumbs {
+		float: none;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#jubilee-header-archives {
+
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		float: none;
+		margin-left: 0;
+		margin-right: 0;
+		white-space: nowrap !important;
+
+		.jubilee-shapes-square & {
+			bottom: ct-em(-23);
+		}
+
+		@media only screen and (min-width: 1600px) {
+
+			.jubilee-shapes-organic &,
+			.jubilee-shapes-angled & {
+				bottom: ct-em(10);
+			}
+
+		}
+
+		@media only screen and (max-width: 980px) {
+
+			.jubilee-shapes-organic &,
+			.jubilee-shapes-angled & {
+				bottom: ct-em(-10);
+			}
+
+		}
+
+		@media only screen and (min-width: 541px) {
+
+			.jubilee-single-has-map & {
+				bottom: ct-em(50);
+			}
+
+		}
+
+		@media only screen and (max-width: 540px) {
+
+			.jubilee-single-has-map & {
+				bottom: ct-em(12);
+			}
+
+		}
+
+	}

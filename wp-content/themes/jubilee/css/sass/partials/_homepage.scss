@@ -1,0 +1,1169 @@
+
+/*---------------------------------------------
+ * Homepage Widget Area
+ *--------------------------------------------*/
+
+// Push contents of first section down in consideration of header bar
+// This pushes contents so those with a background shows through semi-transparent menu bar
+
+#jubilee-home-main {
+
+	// Make space for menu bar.
+	padding-top: ct-em(60);
+	padding-bottom: ct-em(20);
+
+	// Prevent horizontal scroll
+	overflow: hidden;
+
+	// First section in widget area
+	// See what happens for mobile in media-queries.scss
+
+	> *:first-child {
+
+		// Most sections
+
+		&:not(.jubilee-home-highlights-section):not(.jubilee-home-secondary-widgets-section):not(.jubilee-map-section) {
+
+			//padding-top: ct-em(125);
+			padding-top: ct-em(40);
+			padding-bottom: ct-em(20);
+			margin-bottom: ct-em(-20);
+
+		}
+
+		// Image Section (Not Horizontal)
+
+		&.jubilee-image-section:not(.jubilee-section-orientation-horizontal) {
+
+			&.jubilee-image-section-no-image {
+				margin-top: ct-em(70);
+			}
+
+			&.jubilee-image-section-has-image {
+				padding-top: ct-em(120);
+				padding-bottom: ct-em(0);
+			}
+
+			.jubilee-shapes-square &.jubilee-image-section-no-image {
+				margin-top: ct-em(20);
+			}
+
+			.jubilee-shapes-square &.jubilee-image-section-has-image {
+				margin-top: ct-em(-40);
+				padding-top: ct-em(135);
+			}
+
+		}
+
+		// Horizontal CT Section (Gray BG)
+
+		&.jubilee-section-orientation-horizontal {
+
+			visibility: visible !important;
+
+			padding-top: ct-em(8);
+			margin-top: ct-em(140);
+
+			.jubilee-shapes-square & {
+				margin-top: ct-em(100);
+			}
+
+		}
+
+		// Locations
+
+		&.jubilee-map-section {
+
+			padding-top: ct-em(8);
+			margin-top: ct-em(140);
+
+			.jubilee-shapes-square & {
+				margin-top: ct-em(100);
+			}
+
+		}
+
+		// Highlights + Widgets Sections
+
+		&.jubilee-home-highlights-section,
+		&.jubilee-home-secondary-widgets-section {
+
+			margin-top: ct-em(160); // margin instead of padding
+
+			.jubilee-shapes-square & {
+				margin-top: ct-em(120);
+			}
+
+		}
+
+		// Gallery
+
+		&.jubilee-gallery-section {
+
+			margin-top: ct-em(120); // margin instead of padding
+
+			.jubilee-shapes-square & {
+				margin-top: ct-em(80);
+			}
+
+		}
+
+	}
+
+}
+
+// When no widgets show mock CT Section "Add Widgets" section
+
+#jubilee-home-no-widgets-section {
+
+	padding-top: ct-em( 130 ) !important; // move down in consideration of menu bar
+
+	.jubilee-custom-section-content {
+		padding: 0 5%;
+	}
+
+}
+
+/*---------------------------------------------
+ * All Sections
+ *--------------------------------------------*/
+
+.jubilee-home-section {
+
+	margin: ct-em(90) 0;
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+}
+
+/*---------------------------------------------
+ * Custom Section
+ *--------------------------------------------*/
+
+.jubilee-custom-section { // .jubilee-viewport-height-50 (or other size)
+
+	display: table;
+	width: 100%;
+	position: relative;
+
+	&.jubilee-map-section {
+		display: block;
+	}
+
+	// Prepare to fade section in with JS when is first widget
+
+	&.jubilee-section-has-image.jubilee-first-home-widget {
+
+		// Hide first section to fade in
+		.js & { // .js to prevent this when JS is off
+			visibility: hidden; // fade in on load
+		}
+
+	}
+
+	// Horizontal orientation background
+
+	&.jubilee-section-orientation-horizontal {
+
+		@extend .jubilee-bg-secondary;
+		padding-top: ct-em(50) !important;
+		padding-bottom: ct-em(50) !important;
+
+		.jubilee-image-section-content-inner {
+			@extend .jubilee-vertical-margin-small;
+		}
+
+		.jubilee-horizontal-section-shape {
+
+			&:not(.jubilee-show-shape) {
+				display: none;
+			}
+
+			position: absolute;
+			top: -1px; // prevent line in Firefox
+			left: 0;
+			width: 100%;
+			transform: scaleX(-1); // flip it.
+
+			path,
+			polygon {
+				fill: $bg-color;
+			}
+
+			.jubilee-shapes-organic & {
+				height: 1.5vw;
+			}
+
+			.jubilee-shapes-angled & {
+				height: 2vw;
+			}
+
+		}
+
+		.jubilee-horizontal-section-shape-bottom {
+
+			&:not(.jubilee-show-shape) {
+				display: none;
+			}
+
+			position: absolute;
+			bottom: -1px; // prevent line in Firefox
+			left: 0;
+			width: 100%;
+
+			path,
+			polygon {
+				fill: $bg-color;
+			}
+
+			.jubilee-shapes-organic & {
+				height: 2.5vw;
+			}
+
+		}
+
+	}
+
+}
+
+	// Inner
+
+	.jubilee-custom-section-inner {
+
+		display: table-cell;
+		position: relative; // bring content to top
+		z-index: 1; // bring content to top
+		vertical-align: middle;
+		text-align: left;
+	}
+
+		// Different margin depending on screen width
+
+		@media only screen and (min-width: 2501px) {
+
+			.jubilee-custom-section-inner {
+				padding: 0 25%;
+			}
+
+		}
+
+		@media only screen and (max-width: 2500px) {
+
+			.jubilee-custom-section-inner {
+				padding: 0 20%;
+			}
+
+		}
+
+		@media only screen and (max-width: 2200px) {
+
+			.jubilee-custom-section-inner {
+				padding: 0 15%;
+			}
+
+		}
+
+		@media only screen and (max-width: 1900px) {
+
+			.jubilee-custom-section-inner {
+				padding: 0 10%;
+			}
+
+		}
+
+		@media only screen and (max-width: 1600px) {
+
+			.jubilee-custom-section-inner {
+				padding: 0 5%;
+			}
+
+		}
+
+		// Content
+
+		.jubilee-custom-section-content {
+
+			@extend .jubilee-centered-large;
+			@extend .jubilee-vertical-padding-large;
+
+			// Less margin for "Fit" setting
+
+			.jubilee-viewport-height-0 & { // 0 is "Fit" option
+				@extend .jubilee-vertical-padding-medium;
+			}
+
+			// More padding if first section and no image; not horizontal
+
+			//.jubilee-first-home-widget & {
+			.jubilee-first-home-widget.jubilee-image-section-no-image:not(.jubilee-section-orientation-horizontal) & {
+				margin-top: ct-em(110);
+			}
+
+			text-align: left;
+
+			// Constrain width of content for readability
+
+			& > * {
+
+				max-width: 770px;
+
+				// Horizontal, Not first, not large
+
+				.jubilee-home-section.jubilee-section-no-large-text.jubilee-section-orientation-vertical:not(.jubilee-first-home-widget) & {
+					max-width: 770px !important;
+				}
+
+				// Centered text
+
+				@extend .jubilee-centered;
+				text-align: center;
+
+			}
+
+			// Remove top and bottom margins
+
+			> *:first-child {
+				margin-top: 0;
+			}
+
+			> *:last-child {
+				margin-bottom: 0;
+			}
+
+			// Heading
+
+			h1 { // first widget only
+				font-size: 4.2em;
+				letter-spacing: ct-em(-0.5);
+			}
+
+			h1, h2 { // h1 is first widget, h2 is others
+ 				@extend .jubilee-text-over-image; // imperceptible shadow to make text contrast with background image
+			}
+
+			h2 { // h2 used when not first widget
+				font-size: 3.2em;
+				letter-spacing: ct-em(-0.5);
+			}
+
+			// Text
+
+			.jubilee-custom-section-text {
+
+				max-width: 900px;
+
+				// Bigger if first widget on homepage
+
+				.jubilee-first-home-widget:not(.jubilee-section-orientation-horizontal) & {
+					font-size: 1.4rem;
+					line-height: 1.6;
+				}
+
+				// Italic if starts with "
+
+				&.jubilee-custom-section-text-quote {
+					font-style: italic;
+				}
+
+				// White text when use blockquote
+
+				blockquote {
+					color: #fff;
+				}
+
+ 				@extend .jubilee-text-over-image; // imperceptible shadow to make text contrast with background image
+
+ 				p {
+
+ 					margin: ct-em(15) 0 !important;
+
+ 					&:first-child {
+
+ 						margin-top: 0;
+
+						// More space on top before title
+
+						.jubilee-section-orientation-vertical.jubilee-section-has-title & {
+							padding-top: ct-em(4);
+						}
+
+ 					}
+
+ 					&:last-child {
+ 						margin-bottom: 0;
+ 					}
+
+ 				}
+
+				// Large Text
+
+				.jubilee-section-has-large-text & {
+					line-height: 1.4;
+					font-size: 2.2rem;
+				}
+
+				// Responsive images
+
+				img {
+					max-width: 100%;
+				}
+
+			}
+
+			// Buttons
+
+			.jubilee-custom-section-buttons {
+
+				max-width: 100%;
+
+				@extend .jubilee-vertical-margin-top-medium-content;
+				padding-bottom: ct-em(8);
+
+				.jubilee-section-orientation-vertical.jubilee-section-has-title &,
+				.jubilee-section-orientation-vertical.jubilee-section-has-content & {
+					padding-top: ct-em(10);
+				}
+
+			}
+
+			// Horizontal orientation
+
+			.jubilee-section-orientation-horizontal & {
+
+				display: table;
+				width: 100%;
+
+				// Move contents up a little
+
+				h1, h2,
+				.jubilee-custom-section-text {
+					position: relative;
+					top: -1px;
+				}
+
+				// Columns
+
+				h1, h2,
+				.jubilee-custom-section-text,
+				.jubilee-custom-section-buttons {
+					display: table-cell;
+
+				}
+
+				// Title
+
+				h1, h2 {
+	          		width: 1%;
+	          		position: relative;
+	          		top: ct-em(2);
+	          		padding-right: ct-em(25);
+	          		@extend .jubilee-h3; // same size as h3
+	          		white-space: nowrap;
+				}
+
+				// Text
+
+				.jubilee-custom-section-text {
+					width: 99%;
+				}
+
+				// Buttons
+
+				.jubilee-custom-section-buttons {
+
+	          		padding-left: ct-em(30);
+					padding-top: ct-em(6);
+					vertical-align: top;
+
+		          	@extend .jubilee-clearfix;
+
+					ul {
+						float: right;
+		          		white-space: nowrap;
+		          	}
+
+				}
+
+			}
+
+		}
+
+		// Horizontal tweaks
+
+		.jubilee-section-orientation-horizontal {
+
+	 		// Description only - center
+
+			&.jubilee-section-no-title.jubilee-section-no-buttons {
+
+				.jubilee-custom-section-text {
+					display: block;
+					margin: 0 auto;
+				}
+
+			}
+
+	 		// Buttons only
+
+			&.jubilee-section-no-title.jubilee-section-no-content {
+
+				.jubilee-custom-section-buttons {
+
+					display: block;
+
+	          		padding-left: 0;
+					padding-top: 0;
+
+					ul {
+						float: none;
+		          		white-space: normal;
+		          	}
+
+		          	a {
+		          		font-size: 0.9em; // bigger
+		          	}
+
+				}
+
+			}
+
+			// Title + Buttons (no content)
+
+			&.jubilee-section-has-title.jubilee-section-has-buttons.jubilee-section-no-content {
+
+				h1, h2 {
+					vertical-align: middle;
+				}
+
+				.jubilee-custom-section-buttons {
+					padding-top: 0;
+				}
+
+			}
+
+		}
+
+		@media only screen and (min-width: 1024px) {
+
+			.jubilee-image-section-has-image.jubilee-image-section-image-left .jubilee-custom-section-content {
+				padding-left: 4%;
+			}
+
+		}
+
+@media only screen and (max-width: 920px) {
+
+	.container {
+		top: -5vh;
+		right: -35vw;
+	}
+
+}
+
+@media only screen and (max-width: 680px) {
+
+	.container {
+		right: -40vw;
+	}
+
+}
+
+@media only screen and (max-width: 440px) {
+
+	.container {
+		right: -45vw;
+	}
+
+}
+
+/*---------------------------------------------
+ * Section with Image (Left or Right Side)
+ *--------------------------------------------*/
+
+.jubilee-image-section {
+
+	position: relative;
+
+	// Min height when have image
+
+	&.jubilee-image-section-has-image {
+		min-height: 350px;
+	}
+
+	// No image.
+
+	&.jubilee-image-section-no-image:not(.jubilee-section-orientation-horizontal) {
+
+		.jubilee-image-section-content-inner {
+
+			max-width: 100% !important;
+
+			// More padding if first section
+
+			.jubilee-first-home-widget & {
+				margin-top: ct-em(110);
+			}
+
+		}
+
+	}
+
+}
+
+	.jubilee-image-section-image {
+
+		position: absolute;
+		top: 0;
+		width: 38%;
+		height: 100%;
+		background-size: cover;
+		background-position: center center;
+		border: 0;
+
+		// Overlay
+
+		&.jubilee-image-section-overlay {
+			transform: scale(0.999); // Pull color overlay in slightly to reduce dark edges on light images
+		}
+
+		// First section on homepage.
+
+		.jubilee-first-home-widget & {
+			margin-top: 7.5em; // change on height below too
+			height: calc( 100% - 7.5em );
+		}
+
+		// More space at top of square and first home widget.
+
+		.jubilee-shapes-square .jubilee-first-home-widget.jubilee-image-section-has-image.jubilee-image-section-image-right & {
+			margin-top: 8.5em; // change on height below too
+			height: calc( 100% - 8.5em );
+		}
+
+		// Image on Right
+
+			// Organic
+			// https://9elements.github.io/fancy-border-radius/full-control.html#69.40.8.97-71.42.79.100-.
+			// https://9elements.github.io/fancy-border-radius/#72.40.8.100--.
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image.jubilee-image-section-image-right & {
+				border-width: 0;
+				right: -3vw;
+			}
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image:nth-child(1n).jubilee-image-section-image-right & {
+				border-radius: 40% 58% 0% 97% / 69% 8% 21% 29%;
+			}
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image:nth-child(2n).jubilee-image-section-image-right & {
+				border-radius: 100% 59% 98% 70% / 49% 25% 51% 100% ;
+			}
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image:nth-child(3n).jubilee-image-section-image-right & {
+				border-radius: 77% 21% 20% 78% / 28% 71% 20% 69%;
+			}
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image:nth-child(4n).jubilee-image-section-image-right & {
+				border-radius: 27% 94% 24% 100% / 84% 17% 77% 33%;
+			}
+
+			// Angeled
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image.jubilee-image-section-image-right & {
+				right: 0;
+			}
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image:nth-child(1n).jubilee-image-section-image-right & {
+				// Note: Does not work in Edge, and neither does url() method; assume support will add later
+				-webkit-clip-path: polygon(0 10%, 100% 0, 100% 100%, 10% 100%);
+				clip-path: polygon(0 10%, 100% 0, 100% 100%, 10% 100%);
+			}
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image:nth-child(2n).jubilee-image-section-image-right & {
+				-webkit-clip-path: polygon(9% 0, 100% 0, 100% 100%, 0 90%);
+				clip-path: polygon(9% 0, 100% 0, 100% 100%, 0 90%);
+			}
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image:nth-child(3n).jubilee-image-section-image-right & {
+				-webkit-clip-path: polygon(25% 0%, 100% 0, 100% 100%, 15% 92%, 4% 24%);
+				clip-path: polygon(25% 0%, 100% 0, 100% 100%, 15% 92%, 4% 24%);
+			}
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image:nth-child(4n).jubilee-image-section-image-right & {
+				-webkit-clip-path: polygon(13% 0, 100% 5%, 100% 100%, 15% 100%, 0 71%);
+				clip-path: polygon(13% 0, 100% 5%, 100% 100%, 15% 100%, 0 71%);
+			}
+
+			// Square
+
+			.jubilee-shapes-square .jubilee-image-section-has-image.jubilee-image-section-image-right & {
+				right: -3vw;
+				border-top-left-radius: $image-border-radius;
+				border-bottom-left-radius: $image-border-radius;
+			}
+
+		// Image on Left
+
+			// Organic
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image.jubilee-image-section-image-left & {
+				border-width: 0;
+				left: -3vw;
+			}
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image:nth-child(1n).jubilee-image-section-image-left & {
+				border-radius: 9% 94% 47% 50% / 0% 25% 69% 7% ;
+			}
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image:nth-child(2n).jubilee-image-section-image-left & {
+				border-radius: 0% 77% 34% 63% / 57% 27% 71% 4%;
+			}
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image:nth-child(3n).jubilee-image-section-image-left & {
+				border-radius: 58% 40% 30% 69% / 10% 17% 78% 24%;
+			}
+
+			.jubilee-shapes-organic .jubilee-image-section-has-image:nth-child(4n).jubilee-image-section-image-left & {
+				border-radius: 46% 70% 46% 76% / 75% 26% 100% 24%;
+			}
+
+			// Angeled
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image.jubilee-image-section-image-left & {
+				left: 0;
+			}
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image:nth-child(1n).jubilee-image-section-image-left & {
+				-webkit-clip-path: polygon(0 0, 90% 5%, 100% 95%, 0% 100%);
+				clip-path: polygon(0 0, 90% 5%, 100% 95%, 0% 100%);
+			}
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image:nth-child(2n).jubilee-image-section-image-left & {
+				-webkit-clip-path: polygon(0 0, 87% 4%, 100% 28%, 89% 100%, 0% 100%);
+				clip-path: polygon(0 0, 87% 4%, 100% 28%, 89% 100%, 0% 100%);
+			}
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image:nth-child(3n).jubilee-image-section-image-left & {
+				-webkit-clip-path: polygon(0 0, 86% 3%, 90% 33%, 100% 50%, 93% 96%, 0 100%, 0% 70%, 0% 30%);
+				clip-path: polygon(0 0, 86% 3%, 90% 33%, 100% 50%, 93% 96%, 0 100%, 0% 70%, 0% 30%);
+			}
+
+			.jubilee-shapes-angled .jubilee-image-section-has-image:nth-child(4n).jubilee-image-section-image-left & {
+				-webkit-clip-path: polygon(0 0, 89% 2%, 100% 99%, 0% 100%);
+				clip-path: polygon(0 0, 89% 2%, 100% 99%, 0% 100%);
+			}
+
+			// Square
+
+			.jubilee-shapes-square .jubilee-image-section-has-image.jubilee-image-section-image-left & {
+				left: -3vw;
+				border-top-right-radius: $image-border-radius;
+				border-bottom-right-radius: $image-border-radius;
+			}
+
+	}
+
+	.jubilee-image-section-content { // .jubilee-centered-large
+
+		@extend .jubilee-vertical-padding-medium;
+
+		position: relative;
+
+		// Align entries right if have image on left
+
+		.jubilee-image-section-has-image.jubilee-image-section-image-left & {
+			text-align: right;
+		}
+
+	}
+
+		.jubilee-image-section-content-inner {
+
+			display: inline-block;
+			padding: ct-em(50) 0 ct-em(60) 0 !important; // add to .jubilee-vertical-padding-medium above
+			text-align: center;
+
+			// Limit width of entries when have image on side
+
+			.jubilee-image-section-has-image & {
+
+				// Adjust width based on screen size
+				// See style.css and resize browser window to see result
+
+				width: 75%; // higher than 3000
+
+				$img-percent: 74%;
+				@for $i from 30 through 10 { // 1000px through 3000px
+
+					$img-max-width: $i * 100px;
+					$img-percent: $img-percent - 0.9%;
+
+					@media only screen and (max-width: $img-max-width) {
+						width: $img-percent;
+					}
+
+				}
+
+			}
+
+			.jubilee-image-section-no-image & {
+				display: block;
+				padding: 0 !important;
+			}
+
+			.jubilee-image-section-no-image:not(.jubilee-section-orientation-horizontal) & {
+				max-width: 770px;
+			}
+
+			.jubilee-loop-entries {
+
+				// Remove centering applied by .jubilee-loop-three-columns: @extend .jubilee-centered-medium;
+				margin-left: 0;
+				margin-right: 0;
+
+				// Center them on single
+
+				&.jubilee-loop-one-columns {
+
+					margin-left: auto;
+					margin-right: auto;
+					max-width: 565px;
+
+					.jubilee-entry-short {
+
+						margin-bottom: ct-em(35);
+
+						&:last-child {
+							margin-bottom: 0;
+						}
+
+					}
+
+				}
+
+			}
+
+			// Widget Title
+
+			.jubilee-widget-title { // <h2>
+
+				@extend .jubilee-vertical-margin-bottom-small;
+
+				padding-bottom: ct-em(3); // add to .jubilee-vertical-margin-bottom-small
+				margin-top: ct-em(-3);
+				font-size: 3.2em;
+				letter-spacing: ct-em(-0.5);
+
+			}
+
+			// Button at right of title
+
+			.jubilee-image-section-title-button {
+				float: right;
+				margin: ct-em(18) 0 0 ct-em(15);
+			}
+
+			// Buttons at bottom
+
+			.jubilee-image-section-buttons {
+				@extend .jubilee-vertical-margin-top-small;
+				padding-top: ct-em(10);
+			}
+
+			// Prevent unexpected margins at top/bottom when don't have title, desc and buttons
+
+			> *:first-child {
+				margin-top: 0 !important;
+				padding-top: 0 !important;
+			}
+
+			> *:last-child {
+				margin-bottom: 0 !important;
+				padding-bottom: 0 !important;
+			}
+
+		}
+
+			.jubilee-image-section-text {
+
+				margin-top: ct-em(-10); // move up to account for line height
+
+				// No margins on first or lest element (for when no title)
+
+				> *:first-child {
+					margin-top: 0;
+				}
+
+				> *:last-child {
+					margin-bottom: 0;
+				}
+
+
+				p {
+
+					// First paragraph larger text
+
+					&:first-child {
+						font-size: 1.3em;
+					}
+
+				}
+
+				// Lists
+
+				ul,
+				ol {
+
+					display: inline-block;
+					margin: ct-em(10) 0 0 0;
+					padding-top: ct-em(1);
+					font-style: italic;
+					text-align: left;
+
+					li {
+						margin-top: ct-em(7);
+					}
+
+				}
+
+			}
+
+/*---------------------------------------------
+ * Colored Section (Main Color) - Events uses
+ *--------------------------------------------*/
+
+.jubilee-colored-section-inner { // .jubilee-color-main-bg
+	height: ct-em(148);
+	max-height: ct-em(148);
+	overflow: hidden; // if space runs out for elements, they drop to next line invisibly
+}
+
+	.jubilee-colored-section-content { // .jubilee-centered-large
+		display: table;
+		width: 100%;
+	}
+
+		.jubilee-colored-section-entries {
+			display: table-cell;
+			vertical-align: top;
+		}
+
+			.jubilee-colored-section-entry { // <article>
+
+				display: inline-block;
+				margin-right: 5.5%;
+				margin-bottom: ct-em(70); // if space runs out for elements, they drop to next line invisibly
+				vertical-align: top;
+
+				// Limit width; show ... before overflow
+
+				max-width: ct-em(150);
+
+				> *:not(.jubilee-colored-section-label) { // all elements inside except date
+					min-width: ct-em(125);
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					color: #fff;
+				}
+
+			}
+
+				.jubilee-colored-section-label { // e.g. date
+
+					position: relative;
+					top: ct-em(15);
+					display: inline-block;
+					padding: ct-em(10) ct-em(12) ct-em(8);
+					vertical-align: top;
+					line-height: 1;
+					font-size: 0.65em;
+					background-color: #fff;
+					color: $text-color-dark;
+					text-transform: uppercase;
+					border-radius: $label-border-radius;
+
+					.jubilee-shapes-angled & {
+						border-radius: $label-border-radius-angled;
+					}
+
+				}
+
+				.jubilee-colored-section-title { // <h3>
+
+					margin: ct-em(33) 0 ct-em(2) 0;
+					line-height: 1.6;
+					font-size: 0.95em;
+					text-transform: none !important;
+
+					a {
+						border-width: 0 0 2px 0;
+						border-style: solid;
+					}
+
+				}
+
+				.jubilee-colored-section-meta { // e.g. time
+					font-style: italic;
+					font-size: 0.8em;
+				}
+
+		.jubilee-colored-section-button {
+
+			display: table-cell;
+			vertical-align: top;
+			padding-left: ct-em(8);
+			text-align: right;
+
+			a {
+				position: relative;
+				top: ct-em(61);
+				white-space: nowrap;
+			}
+
+		}
+
+			.jubilee-colored-section-button-short {
+				display: none; // "More" shows on mobile insread of "More Events"
+			}
+
+/*---------------------------------------------
+ * Secondary Widgets Section (Row)
+ *--------------------------------------------*/
+
+// See jubilee_home_secondary_widgets_section() for container tags
+
+// Section Container
+
+.jubilee-home-secondary-widgets-section { // .jubilee-widgets-row
+
+	.jubilee-widgets-row-inner { // .jubilee-centered-large
+		padding: ct-em(15) 0;
+	}
+
+}
+
+/*---------------------------------------------
+ * Gallery Section
+ *--------------------------------------------*/
+
+.jubilee-gallery-section {
+
+	overflow: hidden; // see negative margin-right below
+	@extend .jubilee-vertical-margin-large;
+
+	// Gallery shapes
+
+	.jubilee-gallery-home-shape {
+
+		&:not(.jubilee-show-shape) {
+			display: none;
+		}
+
+		position: absolute;
+		top: -1px; // prevent line in Firefox
+		left: 0;
+		width: 100%;
+
+		path,
+		polygon {
+			fill: $bg-color;
+		}
+
+		.jubilee-shapes-organic & {
+			height: 1.2vw;
+		}
+
+		.jubilee-shapes-angled & {
+			transform: scaleX(-1); // flip it.
+			height: 2vw;
+		}
+
+	}
+
+	.jubilee-gallery-home-shape-bottom {
+
+		&:not(.jubilee-show-shape) {
+			display: none;
+		}
+
+		position: absolute;
+		bottom: -1px; // prevent line in Firefox
+		left: 0;
+		width: 100%;
+
+		path,
+		polygon {
+			fill: $bg-color;
+		}
+
+		.jubilee-shapes-organic & {
+			height: 1.2vw;
+		}
+
+	}
+
+}
+
+	.jubilee-gallery-section-content {
+
+		$gallery-items-per-row: 5;
+		$gallery-item-width: 100% / $gallery-items-per-row;
+		$gallery-item-margin: ct-em(30);
+
+		.gallery {
+			margin: 0;
+			margin-right: 0;
+		}
+
+			.gallery-item {
+
+				width: calc( #{$gallery-item-width} );
+
+				img {
+					border-radius: 0;
+				}
+
+				.gallery-caption {
+					display: none;
+				}
+
+			}
+
+		.jubilee-gallery-home-no-images-text {
+			text-align: center;
+		}
+
+	}
+
+		.jubilee-gallery-section-header {
+
+			@extend .jubilee-vertical-margin-bottom-small;
+
+			.jubilee-gallery-section-has-title & {
+				@extend .jubilee-vertical-margin-top-small;
+			}
+
+			position: relative;
+			padding-bottom: ct-em(5); // add to .jubilee-vertical-margin-bottom-small
+			margin-top: ct-em(-3);
+
+			.jubilee-widget-title { // <h2>
+				display: inline-block;
+				margin: 0;
+				font-size: 3.2em;
+				letter-spacing: ct-em(-0.5);
+			}
+
+			.jubilee-button {
+				float: right;
+				margin: ct-em(10) 0 0 ct-em(30) !important;
+			}
+
+		}

@@ -1,0 +1,42 @@
+
+// Content / Website Background
+
+body {
+	background-color: $bg-color;
+}
+
+// Main Color as Background (Customizer)
+
+.jubilee-color-main-bg,
+.jubilee-color-main-bg-alt,
+.jubilee-color-accent-bg {
+
+	// Main background color is set in <head> according to Customizer
+
+	color: $text-color-on-main;
+
+	a,
+	a:hover {
+		color: $text-color-on-main;
+	}
+
+	h1,
+	h2 {
+		color: $text-color-on-main;
+	}
+
+}
+
+// Primary Background
+// See jubilee_alternating_bg_class() for how primary/secondary alternate and when contrast is applied
+
+.jubilee-bg {
+	background-color: $bg-color;
+}
+
+// Secondary Background (alternates with primary on homepage, footer, etc.)
+// See jubilee_alternating_bg_class() for how primary/secondary alternate and when contrast is applied
+
+.jubilee-bg-secondary {
+	background-color: $bg-color-secondary;
+}

@@ -1,0 +1,161 @@
+
+/*---------------------------------------------
+ * Viewport Helpers
+ *--------------------------------------------*/
+
+// Viewport Height (see jQuery fallbacks)
+
+@for $i from 1 through 100 {
+
+  .jubilee-viewport-height-#{$i} {
+    height: #{$i}vh;
+  }
+
+}
+
+/*---------------------------------------------
+ * Centered Blocks
+ *--------------------------------------------*/
+
+.jubilee-centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.jubilee-centered-large { // max width (logo/menu, footer, content containers, etc.)
+	@extend .jubilee-centered;
+	max-width: $max-width;
+}
+
+.jubilee-centered-medium { // homlepage content, extended blockquotes, videos, etc.
+	@extend .jubilee-centered;
+	max-width: $max-width-medium;
+}
+
+.jubilee-centered-small { // page/post content (comfortable reading w/no sidebar)
+	@extend .jubilee-centered;
+	max-width: $max-width-small; // allows entry content about 75 characters per row for optimal readability
+}
+
+/*---------------------------------------------
+ * Constrained Width
+ *--------------------------------------------*/
+
+// Constrain homepage section and header content
+
+.jubilee-constrained-image-content {
+  max-width: 800px;
+}
+
+/*---------------------------------------------
+ * Vertical Spacing
+ *--------------------------------------------*/
+
+// See vertical-spacing mixin for classes to @extend (see _@mixins.scss)
+// When extended, mobile size reduction is automatic (see _variables.scss)
+// Example: @extend .jubilee-vertical-margin-large (or padding)
+
+@include jubilee-vertical-spacing(); // default (can set 'mobile' argument too)
+
+// Small
+// .jubilee-vertical-margin-small
+// .jubilee-vertical-padding-small
+// .jubilee-vertical-margin-top-small
+// .jubilee-vertical-padding-top-small
+// .jubilee-vertical-margin-bottom-small
+// .jubilee-vertical-padding-bottom-small
+
+// Small (Content) - reduced to compensate for increased line height in content
+// .jubilee-vertical-margin-small-content
+// .jubilee-vertical-padding-small-content
+// .jubilee-vertical-margin-top-small-content
+// .jubilee-vertical-padding-top-small-content
+// .jubilee-vertical-margin-bottom-small-content
+// .jubilee-vertical-padding-bottom-small-content
+
+// Medium
+// .jubilee-vertical-margin-medium
+// .jubilee-vertical-padding-medium
+// .jubilee-vertical-margin-top-medium
+// .jubilee-vertical-padding-top-medium
+// .jubilee-vertical-margin-bottom-medium
+// .jubilee-vertical-padding-bottom-medium
+
+// Medium (Content) - reduced to compensate for increased line height in content
+// .jubilee-vertical-margin-medium-content
+// .jubilee-vertical-padding-medium-content
+// .jubilee-vertical-margin-top-medium-content
+// .jubilee-vertical-padding-top-medium-content
+// .jubilee-vertical-margin-bottom-medium-content
+// .jubilee-vertical-padding-bottom-medium-content
+
+// Large
+// .jubilee-vertical-margin-large
+// .jubilee-vertical-padding-large
+// .jubilee-vertical-margin-top-large
+// .jubilee-vertical-padding-top-large
+// .jubilee-vertical-margin-bottom-large
+// .jubilee-vertical-padding-bottom-large
+
+// Large (Content) - reduced to compensate for increased line height in content
+// .jubilee-vertical-margin-large-content
+// .jubilee-vertical-padding-large-content
+// .jubilee-vertical-margin-top-large-content
+// .jubilee-vertical-padding-top-large-content
+// .jubilee-vertical-margin-bottom-large-content
+// .jubilee-vertical-padding-bottom-large-content
+
+// Misc
+// .jubilee-vertical-margin-medium-small-content
+
+/*---------------------------------------------
+ * Main Content <main>
+ *--------------------------------------------*/
+
+#jubilee-content { // <main> between <header> and <footer>
+
+  .ctfw-no-loop-multiple & {
+    @extend .jubilee-vertical-margin-top-large;
+    @extend .jubilee-vertical-margin-bottom-large;
+  }
+
+  .ctfw-has-loop-multiple & {
+    @extend .jubilee-vertical-padding-top-large;
+    @extend .jubilee-vertical-padding-bottom-large;
+  }
+
+  display: block;
+  min-height: 20vh; // makes single line pages line Not Found more comfortable
+
+  // Remove top margin to make certain elements flush with header
+
+  .jubilee-has-entry-map & {
+    margin-top: 0 !important; // important to make it stick at 700px media query
+  }
+
+  // Remove bottom margin to make certain elements flush with footer
+
+  .jubilee-no-comments-section.jubilee-has-nav-blocks & {
+    margin-bottom: 0;
+  }
+
+}
+
+  #jubilee-content-inner {
+
+    // Keep blockquote from causing horizontal scroll
+    // while still letting map-section's top edge appear above banner
+    // See this for why: http://stackoverflow.com/a/39554003
+    padding-bottom: 20px; // just enough space for top of map section content BG and its shadow
+    margin-bottom: -20px;
+
+  }
+
+// H1 heading for main content
+// Header banner uses div instead of H1, because H1 should main in the main article
+// This hides the text, as hidden assistive text, for proper HTMl5 and Outline
+
+#jubilee-main-title,
+.jubilee-entry-no-meta .jubilee-entry-full-header {
+  @extend .screen-reader-text;
+}

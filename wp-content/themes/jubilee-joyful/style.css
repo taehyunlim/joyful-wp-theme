@@ -1,0 +1,15 @@
+/*
+Theme Name: Jubilee Joyful
+Description: A child theme for Jubilee for Joyful Church
+Author: Joyful Church
+Version: 1.0
+Template: jubilee
+*/
+
+/*
+This stylesheet is loaded instead of the parent theme's stylesheet, which is enqueued in functions.php.
+To override styles, copy them here from the original stylesheet, then change the properties.
+
+See http://churchthemes.com/guides/developer/child-theming/ and the WordPress Codex:
+http://codex.wordpress.org/Child_Themes
+*/

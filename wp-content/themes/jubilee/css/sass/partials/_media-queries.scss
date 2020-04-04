@@ -1,0 +1,2424 @@
+
+// Adjust elements and layout for devices with screens of all sizes.
+
+/*----------------------------------------------
+ * Viewport Padding
+ *---------------------------------------------*/
+
+@media only screen and (max-width: $max-width + 130px ) {
+
+	//---------------------------------------------
+	// Layout
+	//---------------------------------------------
+
+	// Header / Footer / Etc.
+	// When width nears max, create margin with percent-based width
+
+	#jubilee-header .jubilee-centered-large,
+	#jubilee-footer .jubilee-centered-large {
+		max-width: 100% - ( $viewport-padding * 2 );
+	}
+
+	// Content Area
+
+	#jubilee-content {
+
+		padding-left: $viewport-padding;
+		padding-right: $viewport-padding;
+
+		// Prevent 1px horizontal scroll on mobile
+		// Also prevents larger horizontal scroll on archive pages (wherever loop short entries)
+		// Don't apply to event/location or map box stops overlapping header banner
+		// Do apply this at 540px to event/location since overlap no longer needed
+		body.single:not(.single-ctc_event):not(.single-ctc_location) &,
+		body.archive &,
+		body.ctfw-has-loop-multiple & {
+			overflow: hidden;
+		}
+
+	}
+
+	//---------------------------------------------
+	// Custom Elements
+	//---------------------------------------------
+
+	// @extend this to prevent padding on 100% width elements, like post nav blocks
+
+	.jubilee-no-viewport-padding {
+		margin-left: (-$viewport-padding-reverse);
+		margin-right: (-$viewport-padding-reverse);
+	}
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	// Keep section contents from touching viewport
+
+	.jubilee-map-section .jubilee-centered-large,
+	.jubilee-custom-section-content,
+	.jubilee-image-section-content.jubilee-centered-large,
+	.jubilee-colored-section-content,
+	.jubilee-home-highlights-section .jubilee-highlights-content,
+	.jubilee-gallery-section .jubilee-centered-large,
+	.jubilee-home-secondary-widgets-section .jubilee-centered-large {
+		max-width: 100% - ( $viewport-padding * 2 ) !important;
+	}
+
+}
+
+/*----------------------------------------------
+ * 1280px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 1280px) {
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	// Highlights - shrink text as columns narrow
+
+	.jubilee-highlights-content {
+
+		font-size: 0.8em;
+
+		h2 {
+			font-size: 1.7em;
+		}
+
+		&#jubilee-galleries {
+
+			font-size: 0.55em;
+
+			h2 {
+				font-size: 1.6em;
+			}
+
+		}
+
+	}
+
+}
+
+/*----------------------------------------------
+ * 1200px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 1200px) {
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	// Highlights - shrink text as columns narrow
+
+	.jubilee-highlights-content {
+
+		font-size: 0.7em;
+
+		h2 {
+			font-size: 1.5em;
+		}
+
+	}
+
+}
+
+
+/*----------------------------------------------
+ * 1300px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 1300px) {
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	.jubilee-entry-short-inner {
+		padding: ct-em(25) ct-em(29);
+	}
+
+}
+
+/*----------------------------------------------
+ * 1180px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 1180px) {
+
+	//---------------------------------------------
+	// Footer
+	//---------------------------------------------
+
+	// Shrink font size of footer highlight
+
+	#jubilee-footer-widgets-row .jubilee-highlight {
+
+		font-size: 0.9em;
+
+		h2 {
+			font-size: 1.5em;
+		}
+
+	}
+
+	//---------------------------------------------
+	// Custom Elements
+	//---------------------------------------------
+
+	// Single post nav prev/next
+
+	.jubilee-nav-block-title {
+		font-size: 1.1em;
+	}
+
+	//---------------------------------------------
+	// Map
+	//---------------------------------------------
+
+	#jubilee-map-section-address {
+		font-size: 1.2em;
+	}
+
+	#jubilee-map-section-buttons { // .jubilee-buttons-list
+		font-size: 0.9em;
+	}
+
+}
+
+/*----------------------------------------------
+ * 1120px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 1120px) {
+
+	//---------------------------------------------
+	// Layout
+	//---------------------------------------------
+
+	// Constrain homepage section and header content
+
+	.jubilee-constrained-image-content {
+	  max-width: 800px;
+	}
+
+	//---------------------------------------------
+	// WordPress
+	//---------------------------------------------
+
+	// Avoid wide touching edge on mobile
+
+	.wp-block-audio.alignwide,
+	.wp-block-audio.alignfull,
+	.wp-block-columns.alignwide,
+	.wp-block-columns.alignfull {
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+
+	.jubilee-block-wide-container .wp-block-table.alignwide,
+	.jubilee-block-wide-container .wp-block-table.alignfull {
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	// Content exceeding content area (blockquote, gallery)
+
+	.jubilee-exceed-980-1170 {
+		margin-left: (-$viewport-padding-reverse);
+		margin-right: (-$viewport-padding-reverse);
+	}
+
+}
+
+/*----------------------------------------------
+ * 641px - 1279px
+ *---------------------------------------------*/
+
+@media only screen and (min-width: 641px) and (max-width: 1279px) {
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	// Less margin on entries
+
+	.jubilee-entry-short-inner {
+
+		padding: ct-em(18) ct-em(22);
+
+		// Smaller heading
+
+		h2 {
+
+			margin-bottom: ct-em(5);
+			font-size: 1em !important;
+			line-height: 1.2;
+
+			a {
+				font-weight: 500 !important;
+			}
+
+		}
+
+		// Meta - less line height
+
+		.jubilee-entry-short-meta { // <ul>
+
+			> li {
+				line-height: 2.3;
+			}
+
+		}
+
+	}
+
+}
+
+/*----------------------------------------------
+ * 1024px - Tablet Landscape, Netbook
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 1024px) {
+
+	//---------------------------------------------
+	// Global Sizing
+	//---------------------------------------------
+
+	// Reduce all fonts / margins
+
+	html {
+		font-size: 90%;
+	}
+
+	//---------------------------------------------
+	// WordPress
+	//---------------------------------------------
+
+	// Reduce pullquote
+
+	.wp-block-pullquote blockquote,
+	.wp-block-pullquote blockquote p {
+		font-size: 1.2em !important;
+	}
+
+	//---------------------------------------------
+	// Header
+	//---------------------------------------------
+
+	// Reduce logo width if necessary to make more room for menu before goes hamburger
+
+	#jubilee-logo-image img {
+		max-width: 180px;
+	}
+
+	// Reduce padding at top of menu links
+
+	#jubilee-header-menu-content {
+		margin-top: ct-em(1);
+	}
+
+	// Adjust menu dropdowns to be flush with menu bar after font size reduction
+
+	.sf-menu li:hover ul,
+	.sf-menu li.sfHover ul {
+		top: 37px;
+		z-index: 12000;
+	}
+
+	// Remove icon divider line
+
+	.jubilee-header-has-icons.jubilee-header-has-search {
+
+		#jubilee-header-icons-divider {
+			display: none;
+		}
+
+		#jubilee-header-icons {
+			padding-left: ct-em(8);
+		}
+
+	}
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	.jubilee-custom-section-content {
+
+		.jubilee-section-orientation-horizontal & {
+
+			h1, h2 {
+	      		position: relative;
+			}
+
+			.jubilee-custom-section-buttons {
+
+          		ul {
+		          	white-space: normal;
+          		}
+
+			}
+
+		}
+
+	}
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	// Keep entry label / date larger
+
+	.jubilee-entry-short-label {
+		font-size: 0.85em !important;
+	}
+
+	//---------------------------------------------
+	// Event Calendar
+	//---------------------------------------------
+
+	// Reduce cell height from 120px
+
+	.jubilee-calendar-table-day-content-container {
+		min-height: 100px;
+	}
+
+}
+
+/*----------------------------------------------
+ * 981px - 1120px
+ *---------------------------------------------*/
+
+@media only screen and (min-width: 981px) and (max-width: 1120px) {
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	// Less margin on entries
+
+	.jubilee-entry-short-inner {
+		padding: ct-em(16) ct-em(20);
+	}
+
+}
+
+/*----------------------------------------------
+ * 980px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 980px) {
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	// Content exceeding content area (blockquote, gallery)
+
+	.jubilee-exceed-700-980 {
+		margin-left: (-$viewport-padding-reverse);
+		margin-right: (-$viewport-padding-reverse);
+	}
+
+	//---------------------------------------------
+	// Header
+	//---------------------------------------------
+
+	// Hide social icons (footer will show these; search stays)
+
+	.jubilee-header-has-icons {
+
+		#jubilee-header-icons,
+		#jubilee-header-icons-divider {
+			display: none;
+		}
+
+	}
+
+	 // Archive Dropdowns
+
+	 #jubilee-header-archives-section-name {
+	 	display: none;
+	 }
+
+}
+
+/*----------------------------------------------
+ * 920px - Mobile Menu
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 920px) {
+
+	//---------------------------------------------
+	// Header
+	//---------------------------------------------
+
+	// Reduce menu bar height
+	#jubilee-header-top-inner { // .jubilee-centered-large
+		height: 58px;
+	}
+
+	// Hide regular menu before MeanMenu loads -- avoid flicker
+
+	.js #jubilee-header-menu-inner,
+	.js .sf-menu {
+		visibility: hidden; // instead display: none or dropdowns go narrow on size up
+		height: 1px;
+		overflow: hidden;
+	}
+
+	// Allow text logo to wrap
+
+	#jubilee-logo {
+		width: 100%;
+	}
+
+		#jubilee-logo-text {
+			white-space: normal;
+		}
+
+	// Reduce space between menu and logo
+
+	#jubilee-header-menu {
+		padding-left: 0;
+	}
+
+	#jubilee-header-menu-content {
+		width: 45px;
+	}
+
+	// Reduce logo text size
+
+	#jubilee-logo-content {
+		font-size: 0.9em;
+	}
+
+	// Hide search icon
+
+	#jubilee-header-search {
+		display: none;
+	}
+
+	// Banner
+
+	#jubilee-banner-top {
+		//top: 4.5em;
+		padding-top: 4em;
+	}
+
+	#jubilee-banner-title {
+
+		h1 {
+			font-size: 3em;
+		}
+
+	}
+
+		#jubilee-banner-image-by-title {
+			top: ct-em(0);
+		}
+
+	//---------------------------------------------
+	// Map
+	//---------------------------------------------
+
+	// Move map section buttons under address
+
+	#jubilee-map-section-header {
+		display: block;
+	}
+
+		#jubilee-map-section-address,
+		#jubilee-map-section-buttons {
+			display: block;
+		}
+
+		// Address
+
+		#jubilee-map-section-address {
+			padding-right: 0;
+		}
+
+		// Buttons
+
+		#jubilee-map-section-buttons { // .jubilee-buttons-list
+
+			position: relative;
+			top: 0;
+			left: 0;
+			padding-top: 0;
+			text-align: left;
+
+			li {
+
+				a {
+					min-width: 0;
+				}
+
+			}
+
+		}
+
+		// List
+
+		.jubilee-map-has-buttons #jubilee-map-section-list { // ul
+
+			// Add space above times when buttons move to their own line on mobile
+
+			padding-top: ct-em(25);
+
+		}
+
+}
+
+/*----------------------------------------------
+ * 900px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 900px) {
+
+	//---------------------------------------------
+	// Sermons
+	//---------------------------------------------
+
+	// Books - reduce to 1 column per testament
+
+	.jubilee-sermon-books-testament { // <section>
+
+		ul {
+
+			$columns: 1;
+
+			-moz-column-count: $columns;
+			-webkit-column-count: $columns;
+			column-count: $columns;
+
+		}
+
+	}
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	.jubilee-map-shape-bottom {
+		display: none;
+	}
+
+}
+
+/*----------------------------------------------
+ * 860px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 860px) {
+
+	//---------------------------------------------
+	// Base Elements
+	//---------------------------------------------
+
+	// Blockquote.
+
+	blockquote.jubilee-exceed-700-980:not(.wp-block-pullquote) {
+
+		padding: 0 ct-em(24) 0 ct-em(58) !important;
+
+		&:before {
+			left: ct-em(7);
+		}
+
+	}
+
+	//---------------------------------------------
+	// WordPress Elements
+	//---------------------------------------------
+
+	/* Gutenberg */
+
+	.has-huge-font-size {
+		font-size: 1.6em !important;
+		line-height: 1.4;
+	}
+
+	.has-large-font-size {
+		font-size: 1.4em !important;
+		line-height: 1.4;
+	}
+
+	.has-regular-font-size {
+		font-size: 1em !important;
+		line-height: 1.6;
+	}
+
+	.has-small-font-size {
+		font-size: 0.85em !important;
+		line-height: 1.6;
+	}
+
+	.wp-block-cover {
+		font-size: 0.8em;
+	}
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	// Gallery photos - show only four now
+
+	.jubilee-gallery-section-content {
+
+		$gallery-items-per-row: 4;
+		$gallery-item-width: 100% / $gallery-items-per-row;
+
+		.gallery-item {
+
+			width: $gallery-item-width;
+
+			&:nth-child(n+5) {
+				display: none;
+			}
+
+		}
+
+	}
+
+}
+
+/*----------------------------------------------
+ * 821px - 920px
+ *---------------------------------------------*/
+
+@media only screen and (min-width: 821px) and (max-width: 920px) { // change mobile size elsewhere here and in main.js
+
+	// Reduce mobile menu size until 820 px when whole document font size is reduced
+
+	.mean-container {
+		font-size: 80%; // don't change from 80% or mobile menu becomes badly-sized
+	}
+
+}
+
+/*----------------------------------------------
+ * 820px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 820px) {
+
+	//---------------------------------------------
+	// Global Sizing
+	//---------------------------------------------
+
+	// Reduce all fonts / margins
+
+	html {
+		font-size: 80%; // don't change from 80% or mobile menu becomes badly-sized
+	}
+
+	//---------------------------------------------
+	// Header
+	//---------------------------------------------
+
+	// Move menu button down
+
+	#jubilee-header-menu-content > li {
+
+		&.jubilee-menu-button > a {
+			top: 1.5px;
+		}
+
+	}
+
+	// Adjust menu dropdowns to be flush with menu bar after font size reduction
+
+	.sf-menu li:hover ul,
+	.sf-menu li.sfHover ul {
+		top: 35px;
+		z-index: 12000;
+	}
+
+	// Move breadcrumb down
+
+	.ctfw-breadcrumbs {
+		padding-top: ct-em(20) !important;
+	}
+
+}
+
+/*----------------------------------------------
+ * 768px - Tablet Portrait
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 768px) {
+
+	//---------------------------------------------
+	// Header
+	//---------------------------------------------
+
+	// Move title down on mobile
+
+	//.jubilee-has-breadcrumbs #jubilee-banner-title {
+	#jubilee-banner-title {
+
+		div {
+
+			padding-top: ct-em(10);
+
+			// More when no breadcrumbs
+
+			.jubilee-no-breadcrumbs & {
+				padding-top: ct-em(15);
+			}
+
+		}
+
+	}
+
+	// Remove image
+
+	#jubilee-banner-image-by-title {
+		display: none;
+	}
+
+	// Add space below title when have archive dropdowns on mobile
+
+	.jubilee-has-header-archives #jubilee-banner-title {
+
+		div {
+			padding-bottom: ct-em(10);
+		}
+
+	}
+
+	#jubilee-banner-title {
+
+		// Move title down when has breadcrumb and archive
+
+		.jubilee-has-breadcrumbs.jubilee-has-header-archives & {
+			position: relative;
+			top: ct-em(12);
+		}
+
+	}
+
+	// Move banner gradient down for breadcrumb
+
+	.jubilee-has-breadcrumbs .jubilee-banner-image-gradient-top {
+		background: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.40) 80%, rgba(0,0,0,0.40) 100%);
+	}
+
+	//---------------------------------------------
+	// Footer
+	//---------------------------------------------
+
+	// Hide footer sticky
+
+	#jubilee-sticky {
+		display: none !important; // important keeps JS from re-showing
+	}
+
+	//---------------------------------------------
+	// Custom Elements
+	//---------------------------------------------
+
+	// Single post nav prev/next
+
+	.jubilee-nav-block-title {
+		font-size: 1.2em;
+	}
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	// Section with Image
+
+	.jubilee-image-section-title-button {
+		margin-top: ct-em(22) !important;	// adjust button position
+	}
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	// Keep entry label / date larger
+
+	.jubilee-entry-short-label {
+		font-size: 0.85em !important;
+	}
+
+	//---------------------------------------------
+	// Event Calendar
+	//---------------------------------------------
+
+	// Reposition icon buttons
+
+	#jubilee-calendar-header-right { // ul.jubilee-list-icons
+		top: ct-em(-10);
+	}
+
+	// Bigger font on dropdowns
+
+	.jubilee-calendar-dropdown {
+		font-size: 1em;
+	}
+
+	// Shorter top row
+
+	.jubilee-calendar-table-header-row { // tr
+		height: ( 40px - $calendar-top-border-radius ); // 40 minus .jubilee-calendar-table-top height
+	}
+
+	//---------------------------------------------
+	// Galleries
+	//---------------------------------------------
+
+	// Galleries Template - Show caption thumbs in 2 columns
+
+	.jubilee-galleries-list .gallery-item { // duplicate in galleries.scss for 2 columns
+		max-width: (100% / 2);
+	}
+
+}
+
+/*----------------------------------------------
+ * 767px - Just Under Tablet Portrait
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 767px) {
+
+	//---------------------------------------------
+	// Base Elements
+	//---------------------------------------------
+
+	// Reduce headings
+
+	#jubilee-content h1,
+	#jubilee-content .jubilee-h1 {
+		font-size: 1.8em;
+	}
+
+	h2,
+	.jubilee-h2 {
+		font-size: 1.6em;
+	}
+
+	h3,
+	.jubilee-h3 {
+		font-size: 1.4em;
+	}
+
+	h4,
+	.jubilee-h4 {
+		font-size: 1.2em;
+	}
+
+	h5,
+	.jubilee-h5 {
+		font-size: 1.1em;
+	}
+
+	h6,
+	.jubilee-h6 {
+		font-size: 1em;
+	}
+
+	// Reduce blockquote
+
+	blockquote {
+
+		font-size: 1.2em !important; // a little bigger
+		padding-right: ct-em(30) !important;
+
+		// Large (Style 2 in Gutenberg).
+
+		&.is-style-large,
+		&.is-style-large p {
+			font-size: 1.4em !important;
+		}
+
+			&.is-style-large p {
+				line-height: 1.2 !important;
+			}
+
+	}
+
+	//---------------------------------------------
+	// Custom
+	//---------------------------------------------
+
+	// Widgets two per row (footer and homepage secondary widgets)
+
+	.jubilee-widgets-row-content {
+
+		$spacing: 6%;
+
+		margin-top: ct-em(-50) !important;
+		margin-right: -$spacing;
+
+		aside {
+			margin-top: ct-em(50);
+			width: 50% - $spacing;
+		}
+
+		.jubilee-widget-title {
+			font-size: 1.5em;
+		}
+
+	}
+
+	// Single post nav prev/next
+
+	.jubilee-nav-block {
+
+		width: 100%; // one per row now
+		padding-bottom: 25%; // ratio for 1600x400 banners
+		margin-bottom: ct-em(20);
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		// Hide empty block
+
+		&.jubilee-nav-block-empty {
+			display: none;
+		}
+
+	}
+
+	.jubilee-nav-block-title {
+		font-size: 1.4em;
+	}
+
+	//---------------------------------------------
+	// WordPress
+	//---------------------------------------------
+
+	// Instant disappear admin bar on scroll so doesn't cover menu as it scrolls up normally
+
+	// Alternate selector to avoid erroneous Theme Check warning
+	// At this mobile size, admin bar disappears on scroll anyway
+	// This just makes it instant as not to obscure our sticky menu
+
+	.jubilee-scrolled.admin-bar div[id*=padminba] {
+		display: none;
+	}
+
+	//---------------------------------------------
+	// Layout
+	//---------------------------------------------
+
+	// Reduce vertical spacing by a certain amount set in _variables.scss.
+	// Elements that @extend these classes receive the reduction too (love this)
+
+	@include jubilee-vertical-spacing( 'mobile' ); // mobile device
+
+	//---------------------------------------------
+	// Header
+	//---------------------------------------------
+
+	#jubilee-banner-title {
+
+		h1 {
+			font-size: 2em;
+		}
+
+	}
+
+		// Shrink image by title (Person)
+
+		$image-by-title-size: ct-em(56) !global;
+		$image-by-title-margin: ct-em(18) !global;
+
+		#jubilee-banner-image-by-title {
+			width: $image-by-title-size;
+			height: $image-by-title-size;
+		}
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	// See original in homepage.scss
+
+	#jubilee-home-main {
+
+		// First section in widget area
+
+		> *:first-child {
+
+			// Most sections
+
+			&:not(.jubilee-home-highlights-section):not(.jubilee-home-secondary-widgets-section):not(.jubilee-map-section) {
+				padding-top: ct-em(0);
+				padding-bottom: ct-em(20);
+				margin-bottom: ct-em(-20);
+			}
+
+			// Image Section (Not Horizontal)
+
+			&.jubilee-image-section:not(.jubilee-section-orientation-horizontal) {
+
+				&.jubilee-image-section-no-image {
+					padding-top: ct-em(20);
+					margin-top: ct-em(55);
+				}
+
+				&.jubilee-image-section-has-image {
+					padding-top: ct-em(120);
+					padding-bottom: ct-em(0);
+				}
+
+				.jubilee-shapes-square &.jubilee-image-section-has-image {
+					margin-top: ct-em(-40);
+				}
+
+				.jubilee-shapes-square &.jubilee-image-section-no-image {
+					margin-top: 0;
+				}
+
+			}
+
+			// Horizontal CT Section (Gray BG)
+
+			&.jubilee-section-orientation-horizontal {
+
+				visibility: visible !important;
+
+				padding-top: ct-em(8);
+				margin-top: ct-em(120);
+
+				.jubilee-shapes-square & {
+					margin-top: ct-em(80);
+				}
+
+			}
+
+			// Horizontal CT Section (Gray BG)
+
+			&.jubilee-section-orientation-horizontal {
+
+				visibility: visible !important;
+
+				padding-top: ct-em(8);
+				margin-top: ct-em(120);
+
+				.jubilee-shapes-square & {
+					margin-top: ct-em(80);
+				}
+
+			}
+
+			// Locations
+
+			&.jubilee-map-section {
+
+				padding-top: ct-em(8);
+				margin-top: ct-em(120);
+
+				.jubilee-shapes-square & {
+					margin-top: ct-em(80);
+				}
+
+			}
+
+			// Highlights + Widgets Sections
+
+			&.jubilee-home-highlights-section,
+			&.jubilee-home-secondary-widgets-section {
+
+				margin-top: ct-em(120); // margin instead of padding
+
+				.jubilee-shapes-square & {
+					margin-top: ct-em(80);
+				}
+
+			}
+
+		}
+
+	}
+
+	// Section with Background Image
+
+	.jubilee-custom-section-content {
+
+		// Reduce heading size
+
+ 		h1 { // first section
+			font-size: 2.7em;
+			letter-spacing: ct-em(-0.5);
+		}
+
+		h2 {
+			font-size: 2em;
+			letter-spacing: ct-em(-0.5);
+		}
+
+		// Reduce first section text
+
+		.jubilee-custom-section-text {
+
+			.jubilee-first-home-widget & {
+				font-size: 1.3rem;
+				line-height: 1.7;
+			}
+
+		}
+
+		// Large Text
+
+		.jubilee-custom-section-text {
+
+			.jubilee-section-has-large-text & {
+				font-size: 1.8rem;
+			}
+
+		}
+
+	}
+
+	// Section with Image (Left or Right Side)
+
+	.jubilee-image-section-content-inner,
+	.jubilee-gallery-section-header {
+
+		// Smaller heading
+
+		.jubilee-widget-title { // <h2>
+			font-size: 2em;
+		}
+
+	}
+
+	// Highlights Section
+
+	.jubilee-highlights-three-columns {
+		@include jubilee-highlights-two-columns( $spacing-px: 30 ); // less spacing on mobile
+	}
+
+	.jubilee-highlights-content {
+
+		// Increase font size
+
+		font-size: 1em;
+
+		h2 {
+			font-size: 1.5em;
+		}
+
+		&#jubilee-galleries {
+
+			font-size: 0.7em;
+
+			h2 {
+				font-size: 1.8em;
+			}
+
+		}
+
+	}
+
+	// Homepage Gallery Widget
+
+	.jubilee-gallery-section-header {
+
+		// Keep centered vertically
+
+		.jubilee-button {
+			margin-top: ct-em(-10) !important;
+		}
+
+	}
+
+	// Gallery Section
+
+	.jubilee-gallery-section-header {
+
+		.jubilee-button {
+			margin-top: ct-em(17) !important; // line up button with title on mobile
+		}
+
+	}
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	.jubilee-loop-four-columns,
+	.jubilee-loop-three-columns,
+	.jubilee-loop-two-columns {
+		@include jubilee-loop-two-columns( $spacing-px: 20 ); // less spacing on mobile
+	}
+
+	//---------------------------------------------
+	// Sermons
+	//---------------------------------------------
+
+	// Save Button Dropdown
+
+	#jubilee-sermon-download-dropdown {
+		//margin-left: ct-em(-62) !important;
+	}
+
+	// Sermon Index List - Three Columns to Two
+
+	.jubilee-sermon-index-list { // <ul>
+
+		&.jubilee-sermon-index-list-three-columns {
+
+			$columns: 2;
+
+			-moz-column-count: $columns;
+			-webkit-column-count: $columns;
+			column-count: $columns;
+
+		}
+
+	}
+
+	//---------------------------------------------
+	// Event Calendar
+	//---------------------------------------------
+
+	// Reposition icon buttons
+
+	#jubilee-calendar-header-right { // ul.jubilee-list-icons
+		padding-top: ct-em(6);
+	}
+
+	// Enlarge title
+
+	#jubilee-calendar-title {
+		font-size: 2em;
+	}
+
+	// Show list container
+
+	#jubilee-calendar-list {
+		display: block;
+	}
+
+	// Day of week header abbreviated
+
+	.jubilee-calendar-table-header-full {
+		display: none;
+	}
+
+	.jubilee-calendar-table-header-short {
+		display: inline-block;
+		font-size: 1.1em;
+	}
+
+	// Hide day label (Today, Oct, etc.)
+
+	.jubilee-calendar-table-day-label {
+		display: none;
+	}
+
+	// Show linked day number if has events (unless in past)
+
+	.jubilee-calendar-table-day-has-events:not(.jubilee-calendar-table-day-past) span.jubilee-calendar-table-day-number {
+		display: none;
+	}
+
+	.jubilee-calendar-table-day-has-events:not(.jubilee-calendar-table-day-past) a.jubilee-calendar-table-day-number {
+		display: inline-block;
+		line-height: 1.1;
+	}
+
+	// Hide event links
+
+	.jubilee-calendar-table-day-events {
+		display: none;
+	}
+
+	// Enlarge and center day
+
+	.jubilee-calendar-table-day-content-container {
+		padding: ct-em(15) 0; // vertical centering and height
+		min-height: 0 !important;
+	}
+
+		.jubilee-calendar-table-day-heading {
+			margin: 0 0 ct-em(2) 0;
+			font-size: 1.2em;
+			text-align: center;
+		}
+
+	//---------------------------------------------
+	// Comments
+	//---------------------------------------------
+
+	// Hide edit link
+
+	.comment-edit-link {
+		display: none !important;
+	}
+
+	.jubilee-comment-buttons li {
+		margin-right: 0;
+	}
+
+ 	// Move inputs below labels
+
+	#respond input[type=text],
+	#respond input[type=email],
+	#respond input[type=url] {
+		position: relative;
+		left: 0;
+		width: 95%;
+	}
+
+	.comment-form-author label.error, // comment error messages
+	.comment-form-email label.error,
+	.comment-form-url label.error {
+		display: block;
+		width: 95%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		text-align: right;
+	}
+
+	.comment-form-author,
+	.comment-form-email,
+	.comment-form-url {
+		margin: ct-em(10) 0;
+	}
+
+}
+
+/*----------------------------------------------
+ * 640px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 640px) {
+
+	//---------------------------------------------
+	// WordPress
+	//---------------------------------------------
+
+	.wp-block-column {
+	  margin-right: 0 !important;
+	}
+
+	.wp-block-column {
+	  margin-bottom: 2.5em !important;
+	}
+
+	.wp-block-column:last-child {
+	  margin-bottom: 0 !important;
+	}
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	// Two columns to one
+
+	.jubilee-loop-two-columns {
+		@include jubilee-loop-one-column( $spacing-px: 30 ); // less spacing on mobile
+	}
+
+	.jubilee-entry-short {
+		font-size: 118%;
+		max-width: 95%;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	// Section Widget
+
+	.jubilee-custom-section-content {
+
+		// Make horizontal orientation go vertical for mobile
+
+		.jubilee-section-orientation-horizontal & {
+
+			display: block;
+
+			// Columns
+
+			h1, h2,
+			.jubilee-custom-section-text,
+			.jubilee-custom-section-buttons {
+				display: block;
+			}
+
+			// Heading orientation
+
+			h1, h2 {
+          		width: auto;
+          		padding-right: 0;
+          		white-space: normal;
+			}
+
+			// Reduce heading size
+
+			h1 { // first section
+				font-size: 2.7em;
+				letter-spacing: ct-em(-0.5);
+			}
+
+			h2 {
+				font-size: 2em;
+				letter-spacing: ct-em(-0.5);
+			}
+
+			// Text
+
+			.jubilee-custom-section-text {
+				padding-top: 0 !important;
+			}
+
+			// Buttons
+
+			.jubilee-custom-section-buttons {
+
+          		padding-left: 0;
+				padding-top: 0;
+
+          		ul {
+          			float: none;
+          		}
+
+			}
+
+		}
+
+	}
+
+	// Section with Image
+	// Move image from side to top
+
+	// NOTE: If change this out of 540px max above, change in _mixins.scss media query too
+
+	.jubilee-custom-section {
+
+		display: block;
+		width: 100%;
+		height: auto;
+
+		.jubilee-custom-section-inner {
+			display: block;
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+	}
+
+		.jubilee-custom-section-content {
+
+			max-width: 100% !important;
+			margin-left: 0;
+			margin-right: 0;
+			margin-bottom: 0 !important;
+			padding-top: 0 !important;
+			padding-bottom: 0 !important;
+
+			// Margin for first section
+
+			.jubilee-first-home-widget & {
+				margin-top: 0;
+			}
+
+			// Less margin if no image.
+
+			.jubilee-image-section-no-image.jubilee-first-home-widget & {
+				margin-top: ct-em(80);
+			}
+
+		}
+
+	body.page-template-homepage #jubilee-map-shape {
+		display: none;
+	}
+
+	.jubilee-image-section {
+
+		font-size: 100%; // restore font size (see 1280px above)
+
+		&.jubilee-image-section-has-image {
+
+			min-height: 0;
+
+			&.jubilee-image-section-image-right {
+				text-align: right;
+			}
+
+		}
+
+	}
+
+		.jubilee-image-section-image {
+
+			display: inline-block;
+			position: relative;
+			width: 100%;
+			max-width: 88%;
+			height: 300px !important;
+
+			$max-height: 40vh;
+			max-height: $max-height;
+
+			&.jubilee-image-section-overlay {
+				position: absolute;
+			}
+
+			.jubilee-image-section:not(.jubilee-first-home-widget) & {
+				margin-top: ct-em(40);
+			}
+
+		}
+
+		.jubilee-image-section-content {
+			position: relative;
+			width: 100%;
+		}
+
+			.jubilee-image-section-content-inner {
+
+				display: block;
+				padding-bottom: 0 !important;
+
+				.jubilee-image-section-has-image & {
+					width: 100%;
+					padding-top: 1em !important;
+				}
+
+			}
+
+		// Remove top padding if first section; do let image go under menu since content is further down
+
+		#jubilee-home-main {
+
+			> *:first-child {
+
+				// Most sections
+
+				&.jubilee-image-section.jubilee-image-section-has-image:not(.jubilee-home-highlights-section):not(.jubilee-home-secondary-widgets-section):not(.jubilee-map-section) {
+
+					padding-top: 0;
+
+					.jubilee-header-menu-wrapped & {
+						padding-top: 0;
+					}
+
+				}
+
+			}
+
+		}
+
+	// Horizontal section
+	.jubilee-custom-section {
+
+		&.jubilee-section-orientation-horizontal {
+
+			.jubilee-image-section-content-inner {
+				padding-bottom: ct-em(30) !important;
+			}
+
+		}
+
+
+		&.jubilee-section-orientation-horizontal.jubilee-first-home-widget {
+
+			.jubilee-image-section-content-inner {
+				padding-bottom: ct-em(60) !important;
+			}
+
+		}
+
+	}
+
+	// Events Widget
+
+	.jubilee-colored-section-button-full {
+		display: none; // "More" shows on mobile insread of "More Events"
+	}
+
+	.jubilee-colored-section-button-short {
+		display: inline-block; // "More" shows on mobile insread of "More Events"
+	}
+
+	// Gallery photos - show only three now
+
+	.jubilee-gallery-section-content {
+
+		$gallery-items-per-row: 3;
+		$gallery-item-width: 100% / $gallery-items-per-row;
+
+		.gallery-item {
+
+			width: $gallery-item-width;
+
+			&:nth-child(n+4) {
+				display: none;
+			}
+
+		}
+
+	}
+
+	//---------------------------------------------
+	// Event Calendar
+	//---------------------------------------------
+
+	// Reduce day height
+
+	.jubilee-calendar-table-day-content-container {
+		padding: ct-em(8) 0; // vertical centering and height
+	}
+
+	// Center list heading
+
+	#jubilee-calendar-list-heading {
+		text-align: center;
+	}
+
+}
+
+/*----------------------------------------------
+ * 401px - 540px
+ *---------------------------------------------*/
+
+// Hide image in compact entry in widget footer between 401 and 540px
+// Re-shows when footer goes from 2 columns to 3
+
+@media only screen and (min-width: 401px) and (max-width: 540px) {
+
+	.jubilee-entry-compact-image {
+		display: none;
+	}
+
+	.jubilee-entry-compact-right {
+		width: 100% !important;
+	}
+
+}
+
+/*----------------------------------------------
+ * 540px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 540px) {
+
+	// Prevent 1px horizontal scroll on mobile
+	// See how this is handled higher up as well
+	#jubilee-content {
+		overflow: hidden !important;
+	}
+
+	//---------------------------------------------
+	// Custom Styles
+	//---------------------------------------------
+
+	// Nav Blocks.
+
+	.jubilee-nav-block-title {
+		font-size: 1.1em;
+	}
+
+	// Move map sections content and map to their own rows
+
+	.jubilee-map-section {
+		min-height: 0;
+	}
+
+		// Section Container, Map and Info
+
+		#jubilee-map-section-map,
+		#jubilee-map-section-canvas {
+			height: 200px;
+		}
+
+		// Remove max height on single entries
+
+		.jubilee-entry-full-map {
+
+			.jubilee-map-section,
+			#jubilee-map-section-canvas {
+				max-height: none;
+			}
+
+		}
+
+			// Map (Right) and Content (Left)
+
+			#jubilee-map-section-map,
+			#jubilee-map-section-content-bg {
+				position: relative;
+				width: 100%;
+			}
+
+			// Map (Right)
+
+			#jubilee-map-section-map { // container for #jubilee-map-section-canvas
+				left: 0;
+			}
+
+			.jubilee-map-shape {
+				display: none;
+			}
+
+			// Content (Left)
+
+			#jubilee-map-section-content-bg {
+				top: 0;
+				height: 100%;
+				box-shadow: none;
+			}
+
+			#jubilee-map-section-content-container {
+				max-width: none !important;
+			}
+
+				#jubilee-map-section-content { // inside #jubilee-map-section-content-container which has .jubilee-centered-large
+					top: 0;
+					display: block;
+					width: 100%;
+					padding: 0 6.5%;
+					background-color: #fff;
+					border-radius: 0 !important;
+				}
+
+					#jubilee-map-section-content-inner {
+						height: auto !important;
+						display: block !important;
+					}
+
+	//---------------------------------------------
+	// WordPress Styles
+	//---------------------------------------------
+
+	// Move floated images to their own line and center
+	// At 540 there is little room left for long words right of a 300px wide floated image
+
+	.alignleft,
+	.alignright {
+
+		display: block;
+		margin: $mobile-vertical-space-small auto !important;
+		float: none !important;
+
+		&.wp-caption {
+			padding-top: ct-em(8);
+		}
+
+	}
+
+	//---------------------------------------------
+	// Galleries
+	//---------------------------------------------
+
+	// Single Gallery - Hide all gallery captions
+
+	.gallery-caption {
+		display: none;
+	}
+
+	// Single Gallery - Make 6+ columns show as 5 columns
+
+	.gallery-columns-6 .gallery-item,
+	.gallery-columns-7 .gallery-item,
+	.gallery-columns-8 .gallery-item,
+	.gallery-columns-9 .gallery-item { /* duplicate in style.css for 5 columns */
+		max-width: (100% / 5);
+	}
+
+	//---------------------------------------------
+	// Event Calendar
+	//---------------------------------------------
+
+	// Center title and controls
+
+	#jubilee-calendar-header-left,
+	#jubilee-calendar-header-right {
+		float: none;
+		margin-left: 0;
+		margin-right: 0;
+		text-align: center;
+	}
+
+	#jubilee-calendar-header-right {
+
+		padding: 0;
+
+		position: relative;
+		top: ct-em(-5);
+		left: ct-em(-15) !important;
+		font-size: 1.8em;
+
+		li:first-child {
+			margin-left: 0;
+		}
+
+	}
+
+		.jubilee-icon-calendar-next.jubilee-calendar-no-prev,
+		.jubilee-icon-calendar-prev.jubilee-calendar-no-next {
+			margin-left: ct-em(4) !important;
+		}
+
+		// Dropdowns - open rightward
+
+		.jubilee-calendar-dropdown,
+		#jubilee-calendar-category-dropdown {
+
+			.jq-dropdown-menu,
+			.jq-dropdown-panel {
+				position: relative;
+				left: ct-em(170);
+			}
+
+		}
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	// Less margin on entries
+
+	.jubilee-entry-short-inner {
+
+		padding: ct-em(18) ct-em(22);
+		font-size: 95% !important;
+
+		// Smaller heading
+
+		h2 {
+
+			margin-bottom: ct-em(5);
+			font-size: 1em !important;
+			line-height: 1.2;
+
+			a {
+				font-weight: 500 !important;
+			}
+
+		}
+
+		// Meta - less line height
+
+		.jubilee-entry-short-meta { // <ul>
+
+			> li {
+				line-height: 2.3;
+			}
+
+		}
+
+	}
+
+}
+
+/*----------------------------------------------
+ * 480px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 480px) {
+
+	//---------------------------------------------
+	// Custom
+	//---------------------------------------------
+
+	// Single post nav prev/next blocks
+
+	.jubilee-nav-block-title {
+		font-size: 1em;
+	}
+
+	// Prev/next nav buttons (comments, attachments)
+	// Stack them on top of each other
+
+	.jubilee-nav-left,
+	.jubilee-nav-right {
+		float: none;
+		text-align: center;
+		margin: 0 auto;
+		width: 100%;
+
+	}
+
+	.jubilee-nav-left {
+		margin-bottom: ct-em(15);
+	}
+
+	// Less space between widgets
+
+	.jubilee-widgets-row-content {
+
+		$spacing: 7%;
+
+		margin-top: ct-em(-40) !important;
+		margin-right: -$spacing;
+
+		aside {
+			margin-top: ct-em(40);
+			width: 50% - $spacing;
+		}
+
+	}
+
+
+	/*---------------------------------------------
+	 * Author Box
+	 *--------------------------------------------*/
+
+	// More compact
+
+	$avatar_reduce: 0.7;
+
+	.jubilee-author-box {
+
+		.single & {
+			min-height: calc( ( #{$author-box-avatar-size} * #{$avatar_reduce} ) + 5em );
+			padding: ct-em(30);
+			padding-bottom: ct-em(25);
+		}
+
+	}
+
+		.jubilee-author-avatar {
+
+			width: calc( #{$author-box-avatar-size} * #{$avatar_reduce} );
+			height: calc( #{$author-box-avatar-size} * #{$avatar_reduce} );
+
+			.single & {
+				left: ct-em(30);
+			}
+
+		}
+
+		.jubilee-author-content {
+
+			margin-left: calc( ( #{$author-box-avatar-size} * #{$avatar_reduce} ) + 1.5em );;
+
+			h2 {
+
+				margin-right: ct-em(20);
+
+				// Prevent long name from bumping "More Posts" button down
+
+				.jubilee-author-box-show-button & {
+					width: calc( 100% - #{ct-em(90)} ); // room for button
+				}
+
+			}
+
+		}
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	 // Full
+
+	.jubilee-entry-full-icons {
+		position: relative;
+		top: ct-em(-2);
+	}
+
+	// Entries smaller
+
+	.jubilee-entry-short-inner {
+		padding: ct-em(16) ct-em(20);
+		font-size: 80% !important;
+	}
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	// Section with Background
+
+	.jubilee-custom-section-content {
+
+		.jubilee-custom-section-text {
+
+			// Smaller content font
+
+			font-size: 1.2em;
+
+			.jubilee-section-has-large-text & {
+				font-size: 1.6em;
+			}
+
+		}
+
+	}
+
+	// Section with Image
+
+	.jubilee-image-section {
+
+		&.jubilee-image-section-has-image {
+
+			// Restore font size now that single column (was reduced for three columns when getting narrow)
+
+			.jubilee-loop-entries,
+			.jubilee-image-section-buttons {
+				font-size: 100%;
+			}
+
+		}
+
+	}
+
+	// Highlights Section - Three columns to one
+
+	.jubilee-highlights-three-columns {
+		@include jubilee-highlights-one-column( $spacing-px: 30 ); // less spacing on mobile
+	}
+
+	//---------------------------------------------
+	// Event Calendar
+	//---------------------------------------------
+
+	// Move month/category dropdowns to right (keep from going off screen on small phones)
+
+	.jubilee-calendar-dropdown {
+
+		.jq-dropdown-panel,
+		.jq-dropdown-menu {
+			right: ct-em(-60) !important;
+		}
+
+	}
+
+	// Make day of week heading normal weight
+
+	.jubilee-calendar-table-header-short {
+		font-weight: normal;
+	}
+
+	// Reduce day size
+
+	.jubilee-calendar-table-day-content-container {
+		padding: ct-em(3) 0; // vertical centering and height
+	}
+
+		.jubilee-calendar-table-day-heading {
+			font-size: 1.1em;
+		}
+
+	//---------------------------------------------
+	// People
+	//---------------------------------------------
+
+	// Show image above meta
+
+	#jubilee-person-header-content,
+	#jubilee-person-image-column,
+	#jubilee-person-meta {
+		display: block;
+		text-align: center;
+		padding-left: 0;
+		margin-left: 0;
+		width: 100%;
+	}
+
+	#jubilee-person-image {
+		margin: 0 auto;
+	}
+
+	#jubilee-person-meta {
+
+		.jubilee-person-has-image & {
+			margin-top: $mobile-vertical-space-small;
+			padding-left: 0;
+		}
+	}
+
+	//---------------------------------------------
+	// Galleries
+	//---------------------------------------------
+
+	// Single Gallery - Make 4+ columns show as 3 columns
+
+	.gallery-columns-4 .gallery-item,
+	.gallery-columns-5 .gallery-item,
+	.gallery-columns-6 .gallery-item,
+	.gallery-columns-7 .gallery-item,
+	.gallery-columns-8 .gallery-item,
+	.gallery-columns-9 .gallery-item { /* duplicate in style.css for 3 columns */
+		max-width: (100% / 3);
+	}
+
+	//---------------------------------------------
+	// Comments
+	//---------------------------------------------
+
+	// Remove "Author" or "Trackback" from after name
+
+	.jubilee-comment-author span,
+	.jubilee-comment-trackback-link span {
+		display: none;
+	}
+
+	// Remove icon from Reply button
+
+	.jubilee-comment-buttons .jubilee-icon {
+		display: none;
+	}
+
+	// Reduce padding on author box with background
+
+	.single-post .bypostauthor > article {
+		padding: ct-em(30);
+	}
+
+}
+
+/*----------------------------------------------
+ * 400px
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 400px) {
+
+	//---------------------------------------------
+	// Custom Elements
+	//---------------------------------------------
+
+	// Widgets one per row (footer and homepage secondary widgets)
+
+	.jubilee-widgets-row-content {
+
+		margin-right: 0;
+
+		aside {
+
+			&:not(:first-child) {
+				margin-top: 0;
+			}
+
+			margin-bottom: ct-em(35);
+			display: block;
+			float: none;
+			width: 100%;
+			font-size: 1em !important; // restore font size since have more space than three column
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+		}
+
+	}
+
+	/*---------------------------------------------
+	 * Homepage
+	 *--------------------------------------------*/
+
+	// Events Widget
+
+	.jubilee-colored-section-button {
+		display: none; // Hide "More" because with long titles / smalls creens, it sometimes only shows 1 (better 2 with no button)
+	}
+
+	/*---------------------------------------------
+	 * Author Box
+	 *--------------------------------------------*/
+
+	// Move button to its own line
+
+	.jubilee-author-content {
+
+		h2 {
+
+			display: block;
+
+			.jubilee-author-box-show-button & {
+				width: 100%;
+			}
+
+		}
+
+	}
+
+		.jubilee-author-box-archive {
+			margin: ct-em(20) 0;
+			float: none;
+		}
+
+		.jubilee-author-bio {
+			line-height: 1.6;
+		}
+
+	//---------------------------------------------
+	// Sermons
+	//---------------------------------------------
+
+	// Sermon Index List - Two Columns to One
+
+	.jubilee-sermon-index-list { // <ul>
+
+		&.jubilee-sermon-index-list-two-columns,
+		&.jubilee-sermon-index-list-three-columns {
+
+			$columns: 1;
+
+			-moz-column-count: $columns;
+			-webkit-column-count: $columns;
+			column-count: $columns;
+
+		}
+
+	}
+
+}
+
+/*----------------------------------------------
+ * 319px - Smaller Than iPhone SE Portrait (320px)
+ *---------------------------------------------*/
+
+@media only screen and (max-width: 319px) {
+
+	//---------------------------------------------
+	// Custom
+	//---------------------------------------------
+
+	// Widgets row smaller font
+
+	.jubilee-widgets-row-content { // footer and homepage secondary widgets
+
+		aside {
+			font-size: 0.95em; // reduce
+		}
+
+	}
+
+	//---------------------------------------------
+	// Header
+	//---------------------------------------------
+
+	// Archive Dropdowns
+
+	#jubilee-header-archives,
+	.jubilee-header-archive-dropdown {
+		display: none !important;
+	}
+
+	//---------------------------------------------
+	// Entries
+	//---------------------------------------------
+
+	// One column
+
+	.jubilee-loop-four-columns,
+	.jubilee-loop-three-columns,
+	.jubilee-loop-two-columns {
+		@include jubilee-loop-one-column( $spacing-px: 30 ); // less spacing on mobile
+	}
+
+	//---------------------------------------------
+	// Homepage
+	//---------------------------------------------
+
+	// Image Section
+
+	.jubilee-image-section-content-inner {
+
+		// Set max width and center so nothing awkwardly wide when one per row
+
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 330px !important;
+
+		// Show one entry max now - small phone, don't make scroll thru 3 or 4
+
+		.jubilee-loop-entries .jubilee-entry-short {
+			display: none;
+		}
+
+		.jubilee-loop-entries .jubilee-entry-short:first-child {
+			display: block;
+			margin-bottom: 0 !important;
+		}
+
+	}
+
+	// Events Widget
+
+	.jubilee-colored-section-button {
+		display: none;
+	}
+
+	// Highlights - Two columns to one
+
+	.jubilee-highlights-four-columns, // four has already gone to two
+	.jubilee-highlights-two-columns {
+		@include jubilee-highlights-one-column( $spacing-px: 30 ); // less spacing on mobile
+	}
+
+		.jubilee-highlights-content {
+
+			// Match font size to highlight in footer
+
+			font-size: 1em;
+
+			h2 {
+				font-size: 1.4em;
+			}
+
+			&#jubilee-galleries {
+				font-size: 0.7em;
+			}
+
+		}
+
+	//---------------------------------------------
+	// Sermons
+	//---------------------------------------------
+
+	// Books - one testament per row
+
+	.jubilee-sermon-books-testament { // <section>
+
+		$column-gap: 14%;
+
+		width: 100%;
+		border: 1px solid red;
+
+		&:nth-child(odd) {
+			margin-right: 0;
+		}
+
+	}
+
+	//---------------------------------------------
+	// Galleries
+	//---------------------------------------------
+
+	// Galleries Template - Show caption thumbs in 1 column
+
+	.jubilee-galleries-list .gallery-item {
+		max-width: 100%;
+	}
+
+	//---------------------------------------------
+	// Comments
+	//---------------------------------------------
+
+	// No indentation for threaded comments
+
+	.jubilee-comment,
+	.jubilee-comment #respond {
+		margin-left: 0;
+	}
+
+}

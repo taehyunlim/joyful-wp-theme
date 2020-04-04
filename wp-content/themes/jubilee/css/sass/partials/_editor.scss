@@ -1,0 +1,15 @@
+
+// These affect the admin area's content editor when adding or editing a post.
+// This is compiled into style.css which is loaded in its entirety into the editor.
+// See jubilee_add_editor_style() for how Customizer fonts and colors are added to editor's <head>.
+
+.mce-content-body {
+
+	margin: ct-em(30); // prevent content from touching edge of editor
+	font-size: 125%; // match actual frontend size
+
+	.wp-caption-dd {
+		padding-top: 0.5em;
+	}
+
+}

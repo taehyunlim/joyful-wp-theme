@@ -1,0 +1,472 @@
+
+/*---------------------------------------------
+ * Footer Container
+ *--------------------------------------------*/
+
+#jubilee-footer {
+	z-index: 0; // keep footer above video on homepage so clickable
+	position: relative; // for making z-index work in IE9 - IE11
+  	@extend .jubilee-vertical-margin-top-large;
+}
+
+/*---------------------------------------------
+ * Footer at Bottom
+ *--------------------------------------------*/
+
+// Helps footer stick to bottom in modern browsers
+
+body:not(.mce-content-body) { // not on editor style
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+#jubilee-content {
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+
+// Internet Explorer hack
+// Flexbox is broken in IE11: https://connect.microsoft.com/IE/feedback/details/802625/min-height-and-flexbox-flex-direction-column-dont-work-together-in-ie-10-11-preview
+// Remove it in IE with the media query hack. Otherwise content area is collapsed. http://keithclark.co.uk/articles/moving-ie-specific-css-into-media-blocks/
+@media screen\0 { // IE9, IE10, IE11, Phone (not Edge12)
+
+	body:not(.mce-content-body) { // not on editor style
+		display: block;
+		min-height: 0;
+	}
+
+	#jubilee-content {
+		-ms-flex: none;
+		flex: none;
+	}
+
+}
+
+/*---------------------------------------------
+ * Footer Widgets
+ *--------------------------------------------*/
+
+#jubilee-footer-widgets-row { // .jubilee-widgets-row
+
+  	@extend .jubilee-vertical-padding-large;
+	@extend .jubilee-bg-secondary;
+
+	min-height: 300px;
+
+	// Prevent horizontal scroll
+	overflow: hidden;
+
+}
+
+	// Extra padding at top when using shape.
+
+	.jubilee-footer-widgets-has-shape .jubilee-widgets-row-inner {
+		padding-top: ct-em(55);
+	}
+
+	.jubilee-footer-widgets-no-shape .jubilee-widgets-row-inner {
+		padding-top: ct-em(10);
+	}
+
+	.jubilee-footer-widgets-shape {
+
+		&:not(.jubilee-show-shape) {
+			display: none;
+		}
+
+		position: absolute;
+		top: -1px; // prevent line in Firefox
+		width: 100%;
+		transform: scaleX(-1); // flip it.
+
+		path,
+		polygon {
+			fill: $bg-color;
+		}
+
+		.jubilee-shapes-organic & {
+			height: 2vw;
+		}
+
+		.jubilee-shapes-angled & {
+			height: 2vw;
+		}
+
+	}
+
+/*---------------------------------------------
+ * Footer Map
+ *--------------------------------------------*/
+
+#jubilee-footer {
+
+    // When no widgets, darker gradient starting above map section to contrast with white content background
+
+    body:not(.home) & { // not on homepage; interferes with widgets
+
+		&.jubilee-footer-no-widgets .jubilee-map-section {
+
+			&::after {
+
+				display: block;
+				position: absolute;
+				top: 0;
+				height: 5em !important;
+				width: 100% !important;
+				margin-top: -5em;
+				content: '';
+
+				background: -moz-linear-gradient(bottom, rgba(252,252,252,1) 2.5em, rgba(252,252,252,0) 5em); /* FF3.6-30 */
+				background: -webkit-linear-gradient(bottom, rgba(252,252,252,1) 2.5em, rgba(252,252,252,0) 5em); /* Chrome10-252,Safari5.1-6 */
+				background: linear-gradient(to top, rgba(252,252,252,1) 2.5em, rgba(252,252,252,0) 5em); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+			}
+
+		}
+
+	}
+
+}
+
+/*---------------------------------------------
+ * Footer Bottom (Icons, Notice, Menu)
+ *--------------------------------------------*/
+
+#jubilee-footer-bottom {
+	position: relative;
+}
+
+#jubilee-footer-bottom-inner {
+
+	@extend .jubilee-vertical-padding-large;
+
+	width: 100%;
+
+	.jubilee-footer-bottom-has-shape & {
+		@extend .jubilee-vertical-padding-top-large;
+	}
+
+	a {
+		color: #fff !important;
+	}
+
+	// Cells (Icons/Notice left, Menu right)
+
+	> * {
+
+		@extend .jubilee-vertical-margin-top-small;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+	}
+
+}
+
+	.jubilee-footer-bottom-shape {
+
+		&:not(.jubilee-show-shape) {
+			display: none;
+		}
+
+		position: absolute;
+		top: -1px; // prevent line in Firefox
+		width: 100%;
+
+		path,
+		polygon {
+
+			fill: $bg-color;
+
+			.jubilee-footer-has-widgets & {
+				fill: $bg-color-secondary;
+			}
+
+		}
+
+		.jubilee-shapes-organic & {
+			height: 2vw;
+		}
+
+		.jubilee-shapes-angled & {
+			height: 2vw;
+		}
+
+	}
+
+	// Icons
+
+	#jubilee-footer-icons {
+
+		.jubilee-list-icons {
+
+			font-size: 2.8em;
+			text-align: center;
+
+			a {
+
+				transition: opacity 1s ease;
+				color: #fff;
+
+				&:hover {
+					opacity: 0.6;
+				}
+
+			}
+
+		}
+
+	}
+
+	// Menu
+
+	#jubilee-footer-menu { // <nav> containing <ul>
+
+		// Plain list styling; top-level and sub
+
+		ul {
+			margin: 0;
+			list-style: none;
+		}
+
+	}
+
+		// Menu list
+
+		#jubilee-footer-menu-content { // <ul>
+
+			// Margin between links
+
+			$margin-horizontal: 3.8%; // horizontal space between links
+			$margin-horizontal-no-submenu: 2.2%; // ditto but for when there are no submenus
+			$margin-vertical: ct-em(18); // vertical space between links, for wrapping
+			$margin-vertical-no-submenu: ct-em(7); // ditto but for when there are no submenus
+
+			// Horizontal margin offset
+			// Negative offsets left/right margin on actual items
+
+			margin: 0 ( -$margin-horizontal / 2) !important;
+
+				// Less margin when no submenus (top-level only)
+
+				.jubilee-footer-no-submenu & {
+					margin: 0 ( -$margin-vertical-no-submenu / 2 ) !important;
+				}
+
+			// Vertical margin offset
+			// Negative offsets bottom margin on actual items
+
+			margin-bottom: -$margin-vertical !important;
+
+				// Less margin when no submenus (top-level only)
+
+				.jubilee-footer-no-submenu & {
+					margin-bottom: -$margin-vertical-no-submenu !important;
+				}
+
+			// Align menu
+
+			.jubilee-footer-has-icons &,
+			.jubilee-footer-has-notice & {
+				text-align: center;
+			}
+
+			// Top-level item
+
+			> li {
+
+				display: inline-block;
+				vertical-align: top;
+				text-align: left;
+				font-size: 1.2em;
+
+				// Horizontal margin
+
+				margin: 0 ($margin-horizontal / 2 ); // set offset above
+
+					// Less margin when no submenus (top-level only)
+
+					.jubilee-footer-no-submenu & {
+						margin: 0 ( $margin-horizontal-no-submenu / 2 ); // set offset above
+					}
+
+				// Vertical margin
+
+				margin-bottom: $margin-vertical; // set offset above
+
+					// Less margin when no submenus (top-level only)
+
+					.jubilee-footer-no-submenu & {
+						margin-bottom: $margin-vertical-no-submenu; // set offset above
+					}
+
+				// Top-level links
+
+				> a {
+
+					display: inline-block;
+					font-size: 0.85em;
+
+					@include jubilee-uppercase();
+
+					.jubilee-footer-has-submenu & {
+						padding-bottom: ct-em(3);
+						font-weight: 500;
+					}
+
+				}
+
+				// Sub-menu contents
+
+				> ul {
+					font-size: 0.725em;
+				}
+
+			}
+
+		}
+
+	// Notice
+
+	#jubilee-footer-notice {
+
+		font-size: 0.85em;
+		text-align: center;
+
+		a {
+			font-weight: bold;
+		}
+
+	}
+/*---------------------------------------------
+ * Bottom Sticky
+ *--------------------------------------------*/
+
+// Latest events, comments, etc.
+
+#jubilee-sticky { // hidden when scroll to footer (or top of home) or under 1024 (see media queries)
+	display: none;
+	position: fixed;
+	bottom: ct-em(15);
+	right: ct-em(15);
+	margin-left: ct-em(15);
+	width: auto;
+	max-width: calc( 100% - 1.8em );
+	z-index: 1000;
+}
+
+	#jubilee-sticky-inner {
+
+		position: relative;
+		padding: ct-em(6) ct-em(46) 0 ct-em(18); // allow space on right for dismiss icon
+		height: ct-em(50);
+		background-color: rgba( 0, 0, 0, 0.07 ); // make slightly darker to contrast with any Main Color BG underneath
+		overflow: hidden;
+		@include jubilee-box();
+
+		.jubilee-shapes-organic & {
+			border-radius: ct-em(25);
+		}
+
+	}
+
+		// Content
+
+		#jubilee-sticky-content {
+			display: inline-block;
+			font-size: 0.8em;
+			line-height: 1.4;
+			color: #fff;
+			width: 100%;
+
+			a {
+				font-weight: bold;
+				color: #fff;
+			}
+
+		}
+
+			// Posts (events, sermons, etc.)
+
+			.jubilee-sticky-item {
+
+				display: inline-block;
+				margin-right: ct-em(18);
+				padding-top: ct-em(11) !important;
+
+				&:last-child {
+					margin-right: 0;
+				}
+
+			}
+
+				.jubilee-sticky-item-date {
+
+					margin-right: ct-em(10);
+					padding: ct-em(5) ct-em(7) ct-em(5) ct-em(12);
+					color: $text-color-dark;
+					font-size: 0.8em;
+					font-weight: normal;
+					border-radius: $label-border-radius;
+					text-transform: uppercase;
+
+					.jubilee-shapes-organic & {
+						border-radius: $label-border-radius-organic;
+					}
+
+					.jubilee-shapes-angled & {
+						border-radius: $label-border-radius-angled;
+					}
+
+				}
+
+				.jubilee-sticky-item-title {
+					color: #fff;
+					font-size: 1.05em;
+					position: relative;
+					top: ct-em(1);
+					transition: all 0.3s;
+				}
+
+
+			#jubilee-sticky-content-custom-content {
+
+				line-height: 3;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				text-align: left;
+				width: 100%;
+
+				a {
+					text-decoration: underline;
+				}
+
+			}
+
+		// Dismiss icon
+
+		#jubilee-sticky-dismiss {
+
+			display: inline-block;
+			position: absolute;
+			top: ct-em(12);
+			right: ct-em(14);
+			padding: 0;
+
+			.jubilee-shapes-organic & {
+				right: ct-em(16);
+			}
+
+			a {
+				font-size: 0.8em;
+				color: #fff !important;
+				transition: opacity 0.3s;
+			}
+
+		}

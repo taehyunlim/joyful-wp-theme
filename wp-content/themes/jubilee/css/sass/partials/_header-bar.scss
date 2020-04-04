@@ -1,0 +1,430 @@
+
+// Also see _header-menu.scss and _header-banner.scss
+
+/*---------------------------------------------
+ * Header Bar
+ *--------------------------------------------*/
+
+#jubilee-header-top {
+
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 99998; // not so high that it exceeds modals or admin bar (99999)
+
+	// Header top line
+
+	&.jubilee-header-has-line {
+		border-top: ct-em(4) solid transparent;
+	}
+
+	transition: none;
+	padding-top: ct-em(20);
+	padding-bottom: ct-em(35);
+
+	.page-template-homepage.jubilee-scrolled &,
+	.page-template-homepage.jubilee-shapes-square &,
+	body:not(.page-template-homepage) & {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	// Move header bar down when admin bar present
+
+	.admin-bar & {
+
+		top: $admin-bar-height;
+
+		// Admin bar height grows when screen width is reduced to this size
+
+		@media screen and (max-width: $admin-bar-mobile-screen-width) {
+			top: $admin-bar-mobile-height;
+		}
+
+	}
+
+		// Admin bar disappears at this size, after scrolling
+
+		@media screen and (max-width: $admin-bar-hidden-screen-width) {
+
+			.jubilee-scrolled.admin-bar & {
+				top: 0;
+			}
+
+		}
+
+}
+
+	// Background Color
+	// On its own div so can fade in/out on scroll
+
+	#jubilee-header-top-bg {
+
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		z-index: -1 !important;
+
+		.jubilee-scrolled &,
+		body:not(.page-template-homepage) & {
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05); // a little "higher" than box() mixin
+		}
+
+		.jubilee-top-shape {
+
+			&:not(.jubilee-show-shape),
+			body:not(.page-template-homepage) & {
+				display: none;
+			}
+
+			position: absolute;
+			bottom: -1px; // prevent line in Firefox
+			right: 0;
+			width: 105%;
+
+			path,
+			polygon {
+				fill: $bg-color;
+			}
+
+			.jubilee-shapes-organic & {
+				height: 1.5vw;
+			}
+
+			.jubilee-shapes-angled & {
+				height: 2.5vw;
+			}
+
+			.jubilee-scrolled & {
+				position: relative;
+				top: -100px;
+			}
+
+		}
+
+	}
+
+	// Logo on left, Menu on right
+
+	#jubilee-header-top-inner { // .jubilee-centered-large
+
+		display: table;
+		width: 100%;
+		min-height: ct-em(64);
+		height: ct-em(90);
+		padding-top: 2px;
+		font-size: 1rem;
+
+		// Vertical centering for left and right elements
+
+		> * {
+			display: table-cell;
+			vertical-align: middle;
+		}
+
+	}
+
+/*---------------------------------------------
+ * Logo
+ *--------------------------------------------*/
+
+#jubilee-logo {
+	display: table-cell;
+	position: relative; // help z-index work
+	width: 14%; // use as little logo space as possible so menu comes close
+}
+
+	#jubilee-logo-content {
+		text-align: left;
+	}
+
+		// Logo Image Container
+
+		#jubilee-logo-image {
+
+			position: relative;
+			max-width: $logo-max-width; // constrain image width
+
+			// See max-width/height set inline on this element in header
+			// It helps keep HiDPI at 1X size while constraining image to 100% container (see #jubilee-logo-image img below)
+			a {
+				display: inline-block;
+			}
+
+		}
+
+			// Logo Image
+
+			#jubilee-logo-image img {
+				max-height: $logo-max-height;
+				height: auto;
+				width: auto;
+			}
+
+			// Retina Logo
+
+			#jubilee-logo-regular {
+				display: inline-block;
+			}
+
+			#jubilee-logo-hidpi {
+				display: none;
+			}
+
+			@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-resolution: 120dpi), only screen and (-o-min-device-pixel-ratio: 5/4) {
+
+				// Swap only if .jubilee-has-hidpi-logo indicates a retina logo exists
+
+				.jubilee-has-hidpi-logo #jubilee-logo-regular {
+					display: none;
+				}
+
+				.jubilee-has-hidpi-logo #jubilee-logo-hidpi[width], // show once jQuery adds dimensions from regular (if sooner, Retina logo shows enlarged for split second)
+				.no-js .jubilee-has-hidpi-logo #jubilee-logo-hidpi // fallback in case JS off
+				{
+					display: inline-block;
+				}
+
+			}
+
+		// Logo Text
+
+		#jubilee-logo-text {
+
+			position: relative;
+			margin: ct-em(4) 0; // so when wraps, is not too close to edge
+			left: -2px;
+			line-height: 1;
+			letter-spacing: ct-em(-0.5);
+			white-space: nowrap; // do wrap on mobile at 640
+
+			// Link
+
+			a {
+				color: #fff !important;
+				font-weight: bold;
+			}
+
+			/* Uppercase logo */
+
+			.jubilee-has-uppercase & {
+				text-transform: uppercase;
+			}
+
+		}
+
+			// Size
+
+			#jubilee-logo-text.jubilee-logo-text-extra-small {
+				font-size: 1.25em;
+			}
+
+			#jubilee-logo-text.jubilee-logo-text-small {
+				font-size: 1.5em;
+			}
+
+			#jubilee-logo-text.jubilee-logo-text-medium {
+				font-size: 1.75em;
+			}
+
+			#jubilee-logo-text.jubilee-logo-text-large {
+				font-size: 2em;
+			}
+
+			#jubilee-logo-text.jubilee-logo-text-extra-large {
+				font-size: 2.25em;
+			}
+
+/*---------------------------------------------
+ * Search
+ *--------------------------------------------*/
+
+// Search icon
+
+#jubilee-header-search {
+
+	position: relative;
+
+	.jubilee-search-button {
+		position: relative;
+		margin: 0 !important;
+	}
+
+}
+
+#jubilee-header-search-close {
+	margin: 0 !important;
+	position: relative;
+	top: ct-em(-0.5);
+}
+
+#jubilee-header-search-opened {
+
+	display: none;
+
+	.jubilee-icon {
+		padding-top: ct-em(2);
+		margin-right: ct-em(-2) !important;
+	}
+
+}
+
+#jubilee-header-search-closed {
+	display: inline-block;
+	padding-top: ct-em(3);
+}
+
+#jubilee-header-menu {
+	display: table-cell;
+}
+
+// Search is toggled open
+
+.jubilee-search-is-open #jubilee-header-menu,
+.jubilee-search-is-open #jubilee-header-search-closed {
+	display: none;
+}
+
+.jubilee-search-is-open #jubilee-header-search-opened {
+	display: inline-block;
+}
+
+// Search form - desktop
+
+#jubilee-header-search {
+
+	position: relative; // help z-index work
+	width: 1%; // minimal width so flush right with social icons
+	z-index: 2; // higher than MeanMenu which is moved up over logo/search
+	padding-left: ct-em(16);
+	text-align: right;
+
+	a {
+		color: #fff;
+	}
+
+	form {
+		position: relative; // keeps it from being covered by background color on sticky menu scroll
+	}
+
+	input[type=text] {
+		width: 200px;
+		font-size: 0.8em;
+		text-transform: none;
+		margin-right: ct-em(5);
+		padding-left: ct-em(10);
+		padding-right: ct-em(10);
+	}
+
+	// Search opened, span same space as menu
+
+	.jubilee-search-is-open & {
+		width: auto;
+	}
+
+}
+
+	#jubilee-header-search-opened {
+
+		text-align: right;
+		white-space: nowrap;
+
+		> * {
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: ct-em(6);
+		}
+
+	}
+
+// Search form - mobile
+
+#jubilee-header-search-mobile {
+
+	position: relative; // help z-index work
+	z-index: 2; // higher than MeanMenu which is moved up over logo/search
+	width: auto;
+	display: block;
+	padding: ct-em(4) 0 ct-em(10) ct-em(11);
+	text-align: left;
+
+	a {
+
+		font-size: 1.8em !important;
+		margin-left: ct-em(3) !important;
+		width: auto;
+		float: none;
+
+		&:hover {
+			color: #fff !important;
+		}
+
+	}
+
+	form {
+
+		position: relative; // keeps it from being covered by background color on sticky menu scroll
+
+		> * {
+			vertical-align: middle;
+			display: inline-block;
+			margin-left: ct-em(6);
+		}
+
+	}
+
+	input[type=text] {
+
+		$input-height: ct-em(33);
+
+		padding: 0 ct-em(10);
+		width: 150px;
+		height: $input-height;
+		font-size: 1.1em;
+		line-height: $input-height;
+		background-color: transparent;
+		border-color: #fff !important;
+		color: #fff !important;
+
+	}
+
+}
+
+/*---------------------------------------------
+ * Search / Icons Divider
+ *--------------------------------------------*/
+
+#jubilee-header-icons-divider {
+
+	width: 1px;
+	padding-left: ct-em(8);
+	height: 100%;
+
+	div {
+		width: 1px;
+		height: 35%;
+		background-color: #bbb;
+	}
+
+}
+
+/*---------------------------------------------
+ * Header Icons
+ *--------------------------------------------*/
+
+// All Icons (social and search)
+
+#jubilee-header .jubilee-icon,
+#jubilee-header .jubilee-list-icons, {
+	font-size: 1.35em;
+}
+
+// Social Icons
+
+#jubilee-header-icons {
+	width: 1%; // minimal width so flush right with search icon
+	padding-left: ct-em(12);
+	white-space: nowrap;
+	text-align: right;
+}

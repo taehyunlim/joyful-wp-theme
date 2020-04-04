@@ -1,0 +1,125 @@
+
+//---------------------------------------------
+// Colors
+//---------------------------------------------
+
+// Text Color
+$text-color: #555;
+$text-color-light: #777;
+$text-color-dark: #000;
+$text-color-on-main: #fff;
+$form-text-color: #000;
+$text-color-error: #c42d2d;
+
+// Background Colors
+$bg-color: #fdfdfd;
+$bg-color-box: #fff;
+$bg-color-secondary: #f6f6f6;
+
+// Text Selection Color
+// This is when user selects text on a page
+$text-selection-color: #000;
+$text-selection-bg-color: #e5e5e5;
+
+//---------------------------------------------
+// Layout
+//---------------------------------------------
+
+$max-width: 1170px; 					// Max width for any content (used on centered content blocks and media queries)
+$max-width-medium: 980px;				// Homepage content, extended blockquotes, videos, etc.
+$max-width-small: 700px;				// Page/post content (comfortable reading w/no sidebar)
+
+$viewport-padding: 6%; 					// Horizontal space between contents and edge of viewport on smaller screens
+$viewport-padding-reverse: $viewport-padding + 1%; // Use more when reversing, because width is coming from inner element that is not as wide
+
+$logo-max-width: 250px; 				// Update in images.php too
+$logo-max-height: 60px;					// Update in images.php too
+
+//---------------------------------------------
+// Typography
+//---------------------------------------------
+
+$entry-font-size: 1em;					// Font size for entries (excerpts, comments) (aim for under 80 characters per line for readability)
+$enlarged-font-size: 1.15em;			// Increased font size (about 20pt) for main article content (under 80 chars per line for readability)
+$enlarged-font-size-reverse: 0.863em;	// What to reverse enlarged font size with
+
+$line-height: 1.5; 						// Body (tighter buttons, menu wrapping, etc.)
+$line-height-content: 1.8;				// Content in posts, comments, widgets
+
+//---------------------------------------------
+// Borders
+//---------------------------------------------
+
+// Border Radius (rounded corners)
+$box-border-radius: ct-em(9) !default;
+$image-border-radius: ct-em(9);
+$label-border-radius: ct-em(5);
+
+// Angled
+$box-border-radius-angled: 1px;
+$image-border-radius-angled: 1px;
+$label-border-radius-angled: 1px;
+
+// Organic
+$box-border-radius-organic: ct-em(18);
+$image-border-radius-organic: ct-em(18);
+$label-border-radius-organic: ct-em(22);
+
+//---------------------------------------------
+// Spacing
+//---------------------------------------------
+
+// Vertical Space
+// See _layout.scss for explanation
+// Note each size is 70% of the next larger size
+
+$vertical-space-small-px: 40;	// Space between paragraphs and blocks in content (like paragraph, bottom of headings, blockquote)
+$vertical-space-medium-px: 55;	// Space between major elements in a section (like top of heading, or comments)
+$vertical-space-large-px: 75;	// Space between sections (like article and comment sections)
+
+$vertical-space-small: ct-rem($vertical-space-small-px);
+$vertical-space-medium: ct-rem($vertical-space-medium-px);
+$vertical-space-large: ct-rem($vertical-space-large-px);
+
+$mobile-vertical-space-reduction: 0.75;	// reduce to this much on mobile
+$mobile-vertical-space-small: ct-rem($vertical-space-small-px * $mobile-vertical-space-reduction);
+$mobile-vertical-space-medium: ct-rem($vertical-space-medium-px * $mobile-vertical-space-reduction);
+$mobile-vertical-space-large: ct-rem($vertical-space-large-px * $mobile-vertical-space-reduction);
+
+$vertical-space-content-reduction: 0.7; // for content, reduce size to this to compensate for line height
+
+//---------------------------------------------
+// Buttons
+//---------------------------------------------
+
+$button-height: 3.6em;
+$button-margin: 0.9em;
+$button-margin-half: $button-margin / 2;
+$button-font-size: 0.75em;
+
+$button-radius: 1.8em; // rounded corners
+$button-radius-square: ct-em(11);
+$button-radius-angled: 2px;
+
+//---------------------------------------------
+// Author Box
+//---------------------------------------------
+
+$author-box-avatar-size-px: 108;
+$author-box-avatar-size: ct-em($author-box-avatar-size-px);
+
+//---------------------------------------------
+// Comments
+//---------------------------------------------
+
+$comment-image-size-px: 54;
+$comment-image-size: ct-em($comment-image-size-px);
+
+//---------------------------------------------
+// Admin Bar
+//---------------------------------------------
+
+$admin-bar-height: 32px;					// Offset menu bar, homepage content and arrow by this much
+$admin-bar-mobile-height: 46px;				// Use this offset for smaller screens (big icons, no text)
+$admin-bar-mobile-screen-width: 782px; 		// Screen width to use mobile height on
+$admin-bar-hidden-screen-width: 750px;		// Screen width that admin bar is hidden at when scroll

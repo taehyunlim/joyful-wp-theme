@@ -1,0 +1,308 @@
+
+/*---------------------------------------------
+ * Google Maps JS
+ *--------------------------------------------*/
+
+// Responsive Map
+
+.ctfw-google-map.ctfw-google-map-responsive {
+	padding-bottom: 50%; // responsive at 1:2 ratio
+}
+
+	/* Prevent responsive images affecting Google Maps */
+
+	.ctfw-google-map img {
+		max-width: none;
+	}
+
+// Default Cursor
+
+.ctfw-google-map div {
+	cursor: default !important;
+}
+
+/*---------------------------------------------
+ * Map Section
+ *--------------------------------------------*/
+
+//$height: 220px; // min-height, will stretch
+$height: 350px; // min-height, will stretch
+
+// Section container
+
+.jubilee-map-section {
+	min-height: $height;
+	z-index: 10; // higher than banner above
+	position: relative;
+	width: 100%;
+}
+
+// Section Container, Map and Info
+
+#jubilee-map-section-map,
+#jubilee-map-section-canvas {
+	height: 100%;
+}
+
+#jubilee-map-section-canvas {
+	displas: none;
+}
+
+	// Map (Right) and Content (Left)
+
+	#jubilee-map-section-map,
+	#jubilee-map-section-content-bg {
+		position: absolute;
+		top: 0;
+	}
+
+	// Map
+
+	#jubilee-map-section-map { // container for #jubilee-map-section-canvas
+		width: 100%;
+		height: 100%;
+		left: 0;
+	}
+
+		.jubilee-map-shape {
+
+			&:not(.jubilee-show-shape) {
+				display: none;
+			}
+
+			position: absolute;
+			top: -1px; // prevent line in Firefox
+			width: 100%;
+
+			path,
+			polygon {
+
+				fill: $bg-color;
+
+				.jubilee-footer-has-widgets & {
+					fill: $bg-color-secondary;
+				}
+
+			}
+
+			.jubilee-shapes-organic & {
+				height: 2vw;
+			}
+
+			.jubilee-shapes-angled & {
+				height: 2vw;
+			}
+
+		}
+
+		.jubilee-map-shape-bottom {
+
+			&:not(.jubilee-show-shape) {
+				display: none;
+			}
+
+			position: absolute;
+			bottom: -1px; // prevent line in Firefox
+			left: 70px;  // dont cover Google Maps branding/links.
+			width: calc( 100% - 70px - 250px ); // dont cover Google Maps branding/links.
+
+			path,
+			polygon {
+				fill: $bg-color;
+			}
+
+			.jubilee-shapes-organic & {
+				height: 1.5vw;
+			}
+
+		}
+
+		// Map Marker (overlay so can use icon font and change color dynamically)
+
+		#jubilee-map-section-marker {
+
+			$icon-size: 50px;
+
+			visibility: hidden; // Show with JS after move to the right.
+			position: absolute;
+			top: calc( 50% - #{$icon-size} ); // vertical center, with botton of icon over the center
+			width: 100%;
+			margin-top: 4px; // offset to match Google's own marker position
+			text-align: center;
+			line-height: 1;
+
+			.jubilee-icon {
+				position: relative; // moved leftward by JS
+				font-size: $icon-size;
+			}
+
+		}
+
+	// Content (Left)
+
+	#jubilee-map-section-content { // inside #jubilee-map-section-content-container which has .jubilee-centered-large
+
+		position: relative; // assist z-index
+		top: ct-em(-20);
+		z-index: 2; // show content above #jubilee-map-section-content-bg
+		display: table;
+		width: 50%; // left half
+		padding: 0 ct-em(50) 0 ct-em(40);
+
+		@include jubilee-box(); // jubilee_widget_image_side_class() applies color class in map-section.php
+
+		.js & {
+			display: none; // Fade in w/JS - like first widget home + header
+		}
+
+	}
+
+		#jubilee-map-section-content-inner {
+
+			@extend .jubilee-dark;
+
+			width: 100%;
+			padding: ct-em(40) 0 ct-em(35) 0; // top and bottom
+			display: block;
+			vertical-align: middle;
+			font-size: 0.95rem;
+
+			> *:nth-child(2) { // Margin between info and buttons if have two sets of content
+				margin-top: ct-em(28);
+			}
+
+		}
+
+			// Header (Address / Buttons)
+
+			#jubilee-map-section-header {
+				display: table;
+				width: 100% !important;
+			}
+
+				#jubilee-map-section-address,
+				#jubilee-map-section-buttons {
+					display: table-cell;
+				}
+
+				// Address
+
+				#jubilee-map-section-address {
+
+					@extend .jubilee-h4;
+
+					margin: 0;
+					padding-bottom: ct-em(15);
+					padding-right: ct-em(0); // don't touch buttons
+
+				}
+
+				// Buttons
+
+				#jubilee-map-section-buttons { // .jubilee-buttons-list
+
+					position: relative;
+					top: ct-em(-12);
+					right: ct-em(-22); // pull it to edge
+					padding-top: $button-margin / 2;
+					vertical-align: middle;
+					text-align: right;
+
+					li {
+
+						a {
+							min-width: ct-em(115);
+							padding-left: ct-em(20);
+							padding-right: ct-em(20);
+						}
+
+					}
+
+				}
+
+			// List
+
+			#jubilee-map-section-list { // ul
+				list-style: none;
+				margin: 0 0 ct-em(-18) 0 !important; // negative of bottom margin below
+				padding: 0;
+				display: inline-block;
+			}
+
+				// Item
+
+				#jubilee-map-section-list > li {
+
+					display: block;
+					float: left;
+					position: relative;
+					margin-right: ct-em(20);
+					margin-bottom: ct-em(18); // set negative margin in #jubilee-map-section-list above
+					vertical-align: top;
+					line-height: 1.4;
+					min-height: ct-em(28); // same height so wrap same
+
+					&.jubilee-map-info-full {
+						float: none;
+					}
+
+					a {
+						position: relative;
+						top: ct-em(-1); // move underline link up
+					}
+
+						// Contents
+
+						& p {
+							margin: 0;
+						}
+
+					.jubilee-list-icons {
+						font-size: 1.4em;
+					}
+
+				}
+
+					// Date (contains item text and recurrence note)
+					#jubilee-map-section-date {
+						white-space: nowrap;
+					}
+
+					// Item Text (before note)
+
+					.jubilee-map-section-item-text { // class applied only when have note
+
+						padding-right: 4px;
+
+						// Dates are important
+
+						#jubilee-map-section-date & {
+
+							padding: ct-em(6) ct-em(12) ct-em(6) ct-em(14);
+							border-radius: $label-border-radius;
+							line-height: 1.1;
+							font-size: 0.85em;
+							font-weight: normal;
+							color: $text-color-dark;
+							text-transform: uppercase;
+							white-space: nowrap;
+
+							.jubilee-shapes-organic & {
+								border-radius: $label-border-radius-organic;
+							}
+
+							.jubilee-shapes-angled & {
+								border-radius: $label-border-radius-angled;
+							}
+
+						}
+
+					}
+
+					// Item Note
+
+					.jubilee-map-section-item-note {
+						white-space: nowrap;
+						margin-left: ct-em(10);
+					}
+

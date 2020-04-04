@@ -1,0 +1,588 @@
+
+/*---------------------------------------------
+ * Calendar
+ *--------------------------------------------*/
+
+$calendar-header-line-height: 3;
+$calendar-top-border-radius: 1px;
+
+// Content before calendar (if any)
+
+.page-template-events-calendar .jubilee-entry-full-content > *:not(#jubilee-calendar) {
+	@extend .jubilee-centered-medium;
+}
+
+// Calendar Container
+
+#jubilee-calendar {
+
+	position: relative;
+	font-size: $enlarged-font-size-reverse;
+
+	.jubilee-entry-has-content & {
+		@extend .jubilee-vertical-margin-top-medium;
+	}
+
+}
+
+// Loading AJAX
+
+#jubilee-calendar-loading {
+	display: none;
+	opacity: 0.7;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	z-index: 100;
+	background-color: $bg-color;
+}
+
+// Month Table and Controls
+
+#jubilee-calendar-header {
+	margin-top: ct-em(-10);
+	@extend .jubilee-clearfix;
+}
+
+	#jubilee-calendar-header-left {
+		float: left;
+		margin-right: ct-em(25);
+		line-height: $calendar-header-line-height;
+		vertical-align: middle;
+	}
+
+		#jubilee-calendar-title { // h2
+
+			display: inline-block;
+			margin: 0;
+			vertical-align: middle;
+			font-size: 2.2em;
+
+			span {
+				display: inline-block;
+				margin-right: ct-em(8);
+			}
+
+		}
+
+			// Category
+
+			#jubilee-calendar-title-category {
+				display: inline-block;
+				text-transform: none;
+				//font-style: italic;
+				font-weight: normal;
+				font-size: 0.95em;
+			}
+
+				#jubilee-calendar-remove-category {
+
+					margin-left: ct-em(3);
+					display: inline-block;
+					position: relative;
+
+					a {
+						position: relative;
+						top: ct-em(-3);
+						font-size: 0.65em;
+						color: $text-color-light;
+						border: none;
+					}
+
+				}
+
+	#jubilee-calendar-header-right { // ul.jubilee-list-icons
+
+		position: relative;
+		top: ct-em(-5);
+		float: right;
+		padding-top: ct-em(0);
+		line-height: $calendar-header-line-height;
+		font-size: 1.5em;
+
+		a { // icon
+
+			position: relative;
+			display: block;
+			margin: 0;
+			padding: 0 ct-em(1.5);
+			text-align: center;
+			border: 0;
+			font-size: 1.1em;
+
+			&:first-child {
+				margin-left: 0;
+			}
+
+		}
+
+		// Icon Adjustments
+
+		.jubilee-icon-calendar-prev,
+		.jubilee-icon-calendar-next {
+			top: ct-em(1);
+			left: ct-em(2);
+			margin-top: 0;
+			font-size: 1.3em;
+			padding: 0;
+		}
+
+		.jubilee-icon-calendar-prev:not(.jubilee-calendar-no-next) {
+			left: ct-em(6);
+		}
+
+		.jubilee-icon-calendar-month {
+			font-size: 1em;
+		}
+
+
+	}
+
+		// Dropdowns (Months, Categories)
+
+		.jubilee-calendar-dropdown {
+
+			margin-top: ct-em(15);
+			left: ct-em(15);
+			font-size: 0.85em;
+
+			.jq-dropdown-panel,
+			.jq-dropdown-menu {
+				position: relative;
+				right: ct-em(-20);
+				padding-top: ct-em(10);
+				padding-bottom: ct-em(8);
+			}
+
+		}
+
+		// Month Dropdown
+
+		#jubilee-calendar-month-dropdown {
+			width: ct-em(190);
+			line-height: 1.8;
+			//text-transform: uppercase;
+		}
+
+			.jubilee-calendar-month-dropdown-year {
+
+				margin-top: ct-em(0);
+				font-size: 1.3em;
+				font-weight: bold;
+				color: #fff;
+
+				&:first-child {
+					margin-top: 0;
+				}
+
+			}
+
+			.jubilee-calendar-month-dropdown-months { // <ul>
+
+				margin: 0;
+				list-style: none;
+				padding-bottom: ct-em(2);
+
+				li {
+
+					display: inline-block;
+					width: 23%;
+
+					&.jubilee-calendar-month-dropdown-past {
+						color: #fff;
+						opacity: 0.58;
+					}
+
+				}
+
+			}
+
+		// Category Dropdown
+
+		#jubilee-calendar-category-dropdown { // .jq-dropdown
+
+			ul {
+
+				li {
+					line-height: 1.1;
+					padding: ct-em(4) 0;
+				}
+
+			}
+
+		}
+
+// Calendar Table
+
+#jubilee-calendar-table { // table
+
+	margin-top: ct-em(28);
+	margin-bottom: 0;
+	border-collapse: separate; // Firefox doesn't like collapse
+	border-spacing: 0;
+	table-layout: fixed; // help overflow: hidden on cells; equal widths
+	border: 0 !important;
+	border-top-left-radius: $label-border-radius;
+	border-top-right-radius: $label-border-radius;
+	overflow: hidden;
+
+	.jubilee-shapes-angled & {
+		border-top-left-radius: $label-border-radius-angled;
+		border-top-right-radius: $label-border-radius-angled;
+	}
+
+}
+
+	// Top (for rounded corners)
+
+	.jubilee-calendar-table-top {
+		height: $calendar-top-border-radius; // equal to border-radius; update .jubilee-calendar-table-header padding-bottom and .jubilee-calendar-table-header-row height
+		border-top-left-radius: $calendar-top-border-radius;
+		border-top-right-radius: $calendar-top-border-radius;
+	}
+
+	// Cells
+
+	#jubilee-calendar-table th,
+	#jubilee-calendar-table td {
+		border: 0;
+		padding: 0;
+		position: relative; // helps today border
+	}
+
+	// Header / Controls
+
+	.jubilee-calendar-table-header-row { // tr
+		height: ( 45px - $calendar-top-border-radius ); // 45 minus .jubilee-calendar-table-top height
+	}
+
+		.jubilee-calendar-table-header { // th
+			width: ( 100% / 7 );
+			border-width: 1px !important;
+			border-style: solid !important;
+			vertical-align: middle;
+			border-color: transparent !important;
+		}
+
+			.jubilee-calendar-table-header-content {
+
+				padding-bottom: $calendar-top-border-radius !important; // offset .jubilee-calendar-table-top height
+				font-size: 1.1em;
+				font-weight: 500;
+				line-height: 1;
+				text-align: center !important;
+				color: $text-color-on-main;
+
+				@include jubilee-uppercase();
+
+			}
+
+				// Three letter abbreviation show on mobile
+
+				.jubilee-calendar-table-header-short {
+					display: none;
+				}
+
+	// Week
+
+	.jubilee-calendar-table-week-first .jubilee-calendar-table-day {
+		border-top-width: 0 !important;
+	}
+
+	.jubilee-calendar-table-day { // td
+		vertical-align: top;
+		border-width: 0 0 1px 1px !important;
+		border-style: solid !important;
+		border-color: #e5e5e5 !important;
+	}
+
+		// First and last days of week
+
+		.jubilee-calendar-table-day-1 {
+			border-left-width: 1px !important;
+		}
+
+		.jubilee-calendar-table-day-7 {
+			border-right-width: 1px !important;
+		}
+
+		// Day content container
+
+		.jubilee-calendar-table-day-content-container {
+			padding: ct-em(5) ct-em(16) ct-em(10) ct-em(10);
+			overflow: hidden;
+			min-height: 120px;
+		}
+
+			.jubilee-calendar-table-day-heading { // div
+				margin: ct-em(2) 0 ct-em(4) 0;
+				text-align: right;
+				white-space: nowrap;
+			}
+
+			.jubilee-calendar-table-day-heading,
+			.jubilee-calendar-table-day-label {
+				color: $text-color-dark;
+			}
+
+				.jubilee-calendar-table-day-label { // span
+					display: inline-block;
+					margin-right: ct-em(3);
+					vertical-align: middle;
+				}
+
+				// Number
+
+				.jubilee-calendar-table-day-number {
+					vertical-align: middle;
+				}
+
+				// Number - linked number for mobile
+
+				a.jubilee-calendar-table-day-number {
+					display: none;
+				}
+
+			.jubilee-calendar-table-day-events { // ul
+
+				list-style: none;
+				margin: 0;
+
+				li {
+					margin-bottom: ct-em(12);
+					font-size: 0.95em;
+					line-height: 1.35;
+				}
+
+					a {
+						margin-right: ct-em(3);
+					}
+
+				.jubilee-calendar-table-day-today & {
+					padding-top: ct-em(45);
+				}
+
+			}
+
+				// Time
+
+				.jubilee-calendar-table-day-event-time {
+					margin-top: ct-em(2);
+					font-size: 0.9em;
+					line-height: 1.2 !important;
+					display: block;
+				}
+
+			// Today
+
+			.jubilee-calendar-table-day-today {
+				z-index: 10;
+				position: relative;
+			}
+
+			.jubilee-calendar-table-day-today-bg {
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0.3;
+				z-index: -1;
+			}
+
+			@media only screen and (min-width: 768px) {
+
+				.jubilee-calendar-table-day-today {
+
+					.jubilee-calendar-table-day-heading {
+
+						display: inline-block;
+						margin-top: ct-em(7);
+						padding: ct-em(8) ct-em(14);
+						border-radius: $label-border-radius;
+						line-height: 1.1;
+						font-size: 0.85em;
+						font-weight: normal;
+						color: $text-color-dark;
+						text-transform: uppercase;
+						position: absolute;
+						right: ct-em(15);
+
+						.jubilee-shapes-organic & {
+							border-radius: $label-border-radius-organic;
+						}
+
+						.jubilee-shapes-angled & {
+							border-radius: $label-border-radius-angled;
+						}
+
+					}
+
+				}
+
+				.jubilee-calendar-table-day-today-bg {
+					display: none;
+				}
+
+			}
+
+			@media only screen and (max-width: 767px) {
+
+				.jubilee-calendar-table-day-today {
+
+					.jubilee-calendar-table-day-heading {
+						background-color: transparent !important;
+					}
+
+				}
+
+			}
+
+			// Past
+
+			.jubilee-calendar-table-day-past {
+
+				background-color: #f9f9f9;
+
+				.jubilee-calendar-table-day-heading {
+					color: #aaa;
+				}
+
+			}
+
+			// Day from other month
+
+			.jubilee-calendar-table-day-other-month {
+
+				background-color: #f2f2f2;
+
+				&:not(.jubilee-calendar-table-day-today) {
+
+					.jubilee-calendar-table-day-heading,
+					.jubilee-calendar-table-day-label {
+						color: #aaa;
+					}
+
+				}
+
+			}
+
+	// Event Hover (Tooltipster)
+	// Entries use .jubilee-event-short class and content-event-short.php partial
+
+	.tooltipster-sidetip.jubilee-tooltipster-calendar {
+
+		margin: 0 ct-em(10); // don't touch edge of screen
+
+		.tooltipster-box {
+
+			margin: 0;
+			padding: 0;
+			border: 0;
+			background-color: transparent;
+
+			.tooltipster-content {
+
+				@include jubilee-box();
+
+				margin: 0;
+				padding: 0;
+				width: ct-em(565);
+				overflow: hidden;
+				font-size: 1em;
+				color: $text-color;
+
+				// Short entry on hover
+
+				.jubilee-entry-short {
+
+					// Workaround for Firefox to keep hover from disappearing when have image
+					height: ct-em(150);
+
+				}
+
+					.jubilee-entry-short-date {
+						display: none;
+					}
+
+			}
+
+		}
+
+	}
+
+
+
+	// Event Hover (Tooltipster)
+	// Entries use .jubilee-event-short class and content-event-short.php partial
+
+	.tooltipster-sidetip.jubilee-tooltipster-calendar {
+
+		.tooltipster-box {
+
+			.tooltipster-content {
+
+				.jubilee-entry-short {
+
+					height: ct-em(150);
+
+				}
+			}
+
+		}
+
+	}
+
+
+	// List of Events (Mobile)
+	// Entries use .jubilee-event-short and content-event-short.php partial
+
+	#jubilee-calendar-list {
+
+		@extend .jubilee-vertical-margin-top-medium;
+		@extend .jubilee-centered;
+
+		display: none;
+		max-width: 565px;
+		padding-bottom: 1em; // keep last entry from getting bottom clipped on mobile
+		text-align: left;
+
+		// Heading above events list
+
+		h3 { // #jubilee-calendar-list-heading
+
+			@extend .jubilee-vertical-margin-bottom-medium;
+
+			display: none;
+			padding-top: ct-em(4);
+			font-size: 1.7em;
+			text-align: center;
+
+		}
+
+		// Event short view
+
+		.jubilee-event-short { // space between each <article> in list; not hover
+
+			@extend .jubilee-vertical-margin-top-small;
+
+			display: none;
+			font-size: 1.2em; // not too small
+
+			// Fade excerpt out after max-height
+
+			max-height: ct-em(380);
+
+		}
+
+			// Date shows on heading instead
+
+			.jubilee-entry-short-date {
+				display: none;
+			}
+
+		.jubilee-event-short:first-of-type {
+			margin-top: 0;
+		}
+
+	}

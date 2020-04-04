@@ -1,0 +1,818 @@
+
+// These are generic styles used by multiple post types
+// NotE: Homepage and Footer may extend this for custom layout
+// See homepage.scss, footer.scscc and the *-home.php widget templates
+
+/*---------------------------------------------
+ * Shared Styles (Full + Short + Comments)
+ *--------------------------------------------*/
+
+.jubilee-loop-entries {
+	padding-bottom: ct-em(12); // preserve shadows
+}
+
+// Entry Content (full content, short excerpt and comment content use this; also editor in admin)
+
+.jubilee-entry-content,
+.jubilee-entry-content-inner,
+.mce-content-body {
+
+	position: relative; // helps content stay on top gradient BG's
+
+	font-size: $entry-font-size;
+	line-height: $line-height-content;
+
+	> :first-child {
+		margin-top: 0 !important; // remove margin from first element (probably <p>)
+	}
+
+	> :last-child {
+		margin-bottom: 0 !important; // remove margin from last element (probably <p>)
+	}
+
+}
+
+// Meta List Icons (Short + Compact)
+
+.jubilee-entry-short-icons,
+.jubilee-entry-compact-icons {
+
+	li {
+		position: relative;
+		top: ct-em(1.5);
+		line-height: 0;
+	}
+
+		.jubilee-icon {
+			position: relative;
+			font-size: 1.15em;
+			font-style: normal;
+			color: $text-color-dark;
+		}
+
+		// Adjustments
+
+		.jubilee-icon-video-watch {
+			font-size: 1.3em;
+			top: ct-em(0.8);
+		}
+
+
+		.jubilee-icon-audio-listen {
+			font-size: 1.1em;
+		}
+
+		.jubilee-icon-pdf-download {
+			top: ct-em(-0.8);
+			font-size: 1.02em;
+		}
+
+}
+
+/*---------------------------------------------
+ * Full / Single
+ *--------------------------------------------*/
+
+// Prevent horizontal scroll
+
+@media only screen and (max-width: 600px) {
+
+	.jubilee-entry-full-content {
+	  overflow: hidden;
+	}
+
+}
+
+// Enlarge font size
+
+.jubilee-entry-full, // single post/page
+.archive #jubilee-content-inner, // treat archive similarly
+.blog #jubilee-content-inner,
+.search #jubilee-content-inner {
+
+	// Larger size for main article content
+
+	& > .jubilee-entry-content {
+
+		@extend .jubilee-enlarged;
+
+		// On loop of short entries show regular size
+
+		#jubilee-loop-after-content {
+			font-size: $enlarged-font-size-reverse;
+		}
+
+	}
+
+}
+
+// Don't let floated image near bottom eat the footer
+
+.jubilee-entry-full-content {
+	@extend .jubilee-clearfix;
+}
+
+// Margin between content and loop after content (short entries)
+
+.jubilee-entry-full .jubilee-entry-content-inner,
+.archive #jubilee-content-inner > .jubilee-entry-content,
+.blog #jubilee-content-inner > .jubilee-entry-content,
+.search #jubilee-content-inner > .jubilee-entry-content
+{
+	@extend .jubilee-vertical-margin-bottom-medium;
+}
+
+// Make certain content exceed content width (Blockquote, Gallery, Image)
+
+.jubilee-exceed-700-980 {
+	margin-left: -140px; // move it out so width is exactly 980
+	margin-right: -140px;
+	padding: 0 ct-em(20); // don't let touch edge since some elements have rounded corners
+}
+
+.jubilee-exceed-980-1170 {
+	margin-left: -70px; // move it out so width is exactly 1170
+	margin-right: -70px;
+	padding: 0 ct-em(20); // don't let touch edge since some elements have rounded corners
+}
+
+// Entry Header
+
+.jubilee-entry-full-header {
+	@extend .jubilee-vertical-margin-bottom-small;
+	padding-bottom: ct-em(8);
+	overflow: hidden; // prevent horizontal scroll on mobile from negative margins
+}
+
+// Entry Map (in header) - Event, Location
+
+.jubilee-entry-full-map {
+
+	@extend .jubilee-no-viewport-padding; // make it fit 100% to viewport on smaller screens
+	@extend .jubilee-vertical-margin-bottom-large;
+
+	.jubilee-map-section,
+	#jubilee-map-section-canvas {
+		max-height: 350px;
+	}
+
+}
+
+    // Darker gradient starting beneath map section to contrast with white content background
+
+	.jubilee-entry-full-map .jubilee-map-section::after { // only if has content or can cover up prev/next blocks
+
+		display: block;
+		position: absolute;
+		bottom: 0;
+		height: 10em !important;
+		width: 100% !important;
+		margin-bottom: -10em;
+		content: '';
+
+		background: -moz-linear-gradient(top,  rgba(252,252,252,1) 5em, rgba(252,252,252,0) 10em); /* FF3.6-30 */
+		background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 5em,rgba(252,252,252,0) 10em); /* Chrome10-252,Safari5.1-6 */
+		background: linear-gradient(to bottom,  rgba(252,252,252,1) 5em,rgba(252,252,252,0) 10em); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+	}
+
+	// Show contents above darker gradient below map section
+
+	.jubilee-entry-full > *:not(.jubilee-entry-full-map),
+	.jubilee-nav-blocks,
+	#comments {
+		z-index: 10;
+		position: relative;
+	}
+
+	// Push contents below map down when no content
+	// Keeps prev/next blocks from being covered by gradient
+
+	.jubilee-entry-no-content .jubilee-entry-full-map {
+		margin-bottom: 10em;
+	}
+
+// Meta List
+
+.jubilee-entry-full-meta { // <ul>
+
+	$vertical-margin: ct-em(10);
+	$vertical-margin-buttons: ct-em(28);
+	$horizontal-margin: ct-em(20);
+
+	margin: (-$vertical-margin) (-$horizontal-margin) 0 0; // negative of li right margin; see overflow: hidden on .jubilee-entry-header
+
+	.jubilee-entry-meta-has-buttons & {
+		margin: (-$vertical-margin-buttons) (-$horizontal-margin) 0 0; // negative of li right margin; see overflow: hidden on .jubilee-entry-header
+	}
+
+	padding-top: ct-em(12); // account for line height
+	padding-bottom: ct-em(1); // keeps bottom of .jubilee-button from being cutoff on mobile
+	list-style: none;
+	font-size: 0.95em;
+	text-align: center;
+
+	> li {
+
+		@extend .jubilee-dark;
+
+		margin: $vertical-margin $horizontal-margin 0 0;
+
+		.jubilee-entry-meta-has-buttons & {
+			margin: $vertical-margin-buttons $horizontal-margin 0 0;
+		}
+
+		display: inline-block;
+		max-width: ct-em(350);
+		vertical-align: top;
+		line-height: 1.4;
+		text-align: left;
+
+		a {
+
+			font-style: normal;
+			position: relative;
+			top: ct-em(-1);
+			white-space: nowrap; // help with Safari issue
+
+			&.mdi { // icon
+				border: 0 !important;
+			}
+
+		}
+
+		// Dates, etc. are important
+
+		&.jubilee-entry-full-date .jubilee-event-date-label,
+		&.jubilee-entry-full-meta-bold {
+
+			display: inline-block;
+			padding: ct-em(8) ct-em(14);
+			border-radius: $label-border-radius;
+			line-height: 1.1;
+			font-size: 0.8em;
+			font-weight: normal;
+			color: $text-color-dark;
+			text-transform: uppercase;
+
+			.jubilee-shapes-organic & {
+				border-radius: $label-border-radius-organic;
+			}
+
+			.jubilee-shapes-angled & {
+				border-radius: $label-border-radius-angled;
+			}
+
+		}
+
+		&.jubilee-entry-full-date .jubilee-event-date-label {
+			margin-top: ct-em(-6);
+		}
+
+		&.jubilee-entry-full-meta-bold {
+			margin-top: ct-em(7);
+		}
+
+	}
+
+}
+
+	// Buttons
+
+	.jubilee-entry-full-meta-buttons {
+
+		position: relative;
+		top: ct-em(-12);
+
+		a {
+			margin-right: ct-em(7);
+		}
+
+	}
+
+	.jubilee-entry-full-meta-second-line {
+
+		font-style: italic;
+
+		.jubilee-entry-full-date & {
+			margin: ct-em(4) 0 0 ct-em(14);
+			font-size: 0.9em;
+		}
+
+	}
+
+// Smaller icons in entry meta (see Person)
+
+.jubilee-entry-full-icons {
+	font-size: 1.1em;
+	position: relative;
+	top: ct-em(1);
+}
+
+// Make blockquote exceed bounds horizontally (only on narrow width)
+
+.jubilee-content-width-700 .jubilee-entry-full-content > blockquote { // not on short view (first level)
+	@extend .jubilee-exceed-700-980;
+}
+
+// Make gallery exceed bounds horizontally
+
+.jubilee-content-width-700 .jubilee-entry-full-content > .gallery { // not on short view (first level)
+	@extend .jubilee-exceed-700-980;
+}
+
+// Make single image in content exceed bounds horizontally
+
+.jubilee-image-exceed-700-980 { // <p> that contains img
+	@extend .jubilee-exceed-700-980;
+}
+
+// Entry Footer
+
+.jubilee-entry-full-footer {
+	@extend .jubilee-vertical-margin-top-medium;
+}
+
+	// Item such as for terms
+
+	.jubilee-entry-full-footer-item {
+
+		@extend .jubilee-dark;
+
+		margin: ct-em(20) 0;
+		text-align: center;
+		font-size: 0.95em;
+
+		&:first-child {
+			margin-top: 0; // no margin on first item
+		}
+
+	}
+
+		// Term Lists (categories, tags, etc.)
+
+		.jubilee-entry-full-footer-terms {
+
+			margin-top: ct-em(10);
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+		}
+
+	// Multipage Navigation (Prev/Next)  - for posts/pages broken into multiple pages
+
+	.jubilee-entry-full-page-nav { // .jubilee-buttons-list
+
+		text-align: center;
+
+		li {
+			margin: 0 ct-em(8);
+		}
+
+		.jubilee-entry-full-footer-has-terms & {
+			@extend .jubilee-vertical-margin-medium;
+		}
+
+		.jubilee-entry-full-footer-no-terms.jubilee-no-comments-section & {
+			position: relative;
+			top: ct-em(-18);
+			padding-top: ct-em(18);
+		}
+
+
+	}
+
+// Password Protection Form
+
+.post-password-form {
+
+	font-size: $enlarged-font-size-reverse;
+
+	label {
+		font-weight: 600;
+	}
+
+	input[type=password] {
+		display: block; // force "Password:" and submit button to their own lines
+		margin: 20px 0;
+	}
+
+}
+
+/*---------------------------------------------
+ * Short / Multiple
+ *--------------------------------------------*/
+
+// Short Entry
+// Note: Also used by entry widgets and event calendar hovers / mobile list
+
+.jubilee-entry-short { // space between each <article>
+
+	@include jubilee-box();
+	position: relative;
+	background-color: #fff;
+	overflow: hidden;
+	max-width: 565px;
+	text-align: left;
+
+	// Fade excerpt out after max-height
+
+	//&.jubilee-entry-has-excerpt {
+
+		// Add gradient layer to bottom
+
+		&::after {
+
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+			width: 100%;
+			height: 15px;
+			opacity: 0.9;
+
+			// Gradient
+			background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+		}
+
+	//}
+
+}
+
+	// Label (usually a date)
+
+	.jubilee-entry-no-excerpt .jubilee-entry-short-date {
+		width: 100%; // on a line of its own when no text below, to fill that space
+	}
+
+		.jubilee-entry-short-label { // <time>
+
+			padding: ct-em(7) ct-em(16) ct-em(7);
+			border-radius: $label-border-radius;
+			line-height: 1.1;
+			font-size: 0.85em;
+			font-weight: normal;
+			color: $text-color-dark;
+			//float: right;
+			text-transform: uppercase;
+
+			.jubilee-shapes-organic & {
+				border-radius: $label-border-radius-organic;
+			}
+
+			.jubilee-shapes-angled & {
+				border-radius: $label-border-radius-angled;
+			}
+
+		}
+
+	// Image - flush with edge
+
+	.jubilee-entry-short-image { // also .jubilee-entry-short-image-placeholder
+
+		display: block;
+		position: relative;
+		width: 40%;
+		z-index: 2;
+		border-top-right-radius: 0 !important;
+		border-bottom-right-radius: 0 !important;
+
+		img {
+			display: block; // fixes line at top of image at certain screen sizes
+			border-top-right-radius: 0 !important;
+			border-bottom-right-radius: 0 !important;
+		}
+
+		&.jubilee-entry-short-image-placeholder {
+			z-index: -1; // behind content
+		}
+
+	}
+
+	// Inner - right of image
+
+	.jubilee-entry-short-inner {
+
+		position: absolute;
+		top: 0;
+		padding: ct-em(28) ct-em(32);
+
+		.jubilee-entry-has-image & {
+			left: 40%;
+			width: 60%;
+		}
+
+		// Vertical margin between elements
+
+		$element-margin: ct-em(11);
+
+		> *,
+		.jubilee-entry-short-header > * {
+
+			margin-top: $element-margin;
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+		}
+
+		// Links
+
+		.jubilee-entry-short-meta a,
+		.jubilee-entry-content-short a {
+			border-width: 0;
+			font-weight: normal;
+		}
+
+		// Heading
+
+		h2 {
+
+			margin-bottom: ct-em(5);
+			font-size: 1.15em !important;
+			text-transform: none !important;
+			line-height: 1.2;
+			font-weight: 500 !important;
+
+			a {
+				font-weight: 500 !important;
+			}
+
+		}
+
+	}
+
+		// Meta
+
+		.jubilee-entry-short-meta { // <ul>
+
+			@extend .jubilee-clearfix;
+
+			margin-left: ct-em(-7);
+			margin-right: ct-em(-7);
+			margin-bottom: ct-em(10);
+			font-size: 0.8em;
+
+			> li {
+
+				@extend .jubilee-dark;
+
+				float: left;
+				margin: 0 ct-em(7);
+				padding: ct-em(2) 0;
+				display: inline-block;
+				vertical-align: top;
+				line-height: 2.9;
+
+			}
+
+				a {
+					border: 0 !important;
+					font-weight: normal !important;
+					color: $text-color-dark;
+				}
+
+
+		}
+
+			.jubilee-entry-short-separator {
+				@extend .jubilee-light;
+				margin: 0 ct-em(3);
+			}
+
+			.jubilee-entry-short-secondary {
+				color: $text-color;
+				font-style: italic;
+			}
+
+		.jubilee-entry-content-short {
+			padding-top: ct-em(1);
+			font-size: 0.78em;
+			line-height: 1.5;
+		}
+
+// Columns
+
+.jubilee-loop-four-columns {
+	@include jubilee-loop-four-columns();
+}
+
+.jubilee-loop-three-columns {
+	@include jubilee-loop-three-columns();
+}
+
+.jubilee-loop-two-columns {
+	@include jubilee-loop-two-columns();
+}
+
+.jubilee-loop-one-column {
+	@extend .jubilee-centered-medium;
+}
+
+// Sticky posts - required class
+
+.sticky {
+	display: block;
+}
+
+/*---------------------------------------------
+ * Compact
+ *--------------------------------------------*/
+
+$compact-image-width: 108px;
+$compact-image-max-width: 35%;
+
+// Compact Entry
+// Used by widgets in footer
+
+.jubilee-entry-compact { // space between each <article>
+
+	@include jubilee-box();
+
+	background-color: #fff;
+	border-radius: $box-border-radius !important;
+
+	.jubilee-shapes-angled & {
+		border-radius: $box-border-radius-angled !important;
+	}
+
+
+}
+
+	// Header (Image Left + Title/Meta Right)
+
+	.jubilee-entry-compact-header {
+
+		@extend .jubilee-clearfix;
+		overflow: hidden; // see 1px notes below
+
+		// Image Left + Title/Meta Right
+
+		> div {
+			float: left;
+			vertical-align: top;
+		}
+
+	}
+
+		// Left - Image
+
+		.jubilee-entry-compact-image {
+
+			// The 1px stuff below keeps a 1px line from appearing at certain screen sizes
+			// See hidden overflow in .jubilee-entry-compact-header
+
+			width: $compact-image-width;
+			max-width: $compact-image-max-width;
+			position: relative;
+			overflow: hidden;
+
+			img {
+
+				display: block; // fixes line at top of image at certain screen sizes
+				border-radius: $box-border-radius !important;
+
+				.jubilee-shapes-angled & {
+					border-radius: $box-border-radius-angled !important;
+				}
+
+			}
+
+			// Date
+
+			time {
+
+				position: absolute;
+				bottom: ct-em(8);
+				left: ct-em(8);
+				padding: ct-em(10) ct-em(11);
+				line-height: 1;
+				font-size: 0.7em;
+				color: $text-color-dark;
+				text-transform: uppercase;
+				border-radius: $box-border-radius;
+
+				.jubilee-shapes-organic & {
+					border-radius: $box-border-radius-organic;
+				}
+
+				.jubilee-shapes-angled & {
+					border-radius: $box-border-radius-angled;
+				}
+
+			}
+
+		}
+
+		// Right - Title & Meta
+
+		.jubilee-entry-compact-right {
+
+			width: calc( 100% - #{$compact-image-width} );
+			min-width: calc( 100% - #{$compact-image-max-width} );
+			padding: ct-em(14) ct-em(18) ct-em(12) ct-em(18);
+
+			.jubilee-entry-has-excerpt & {
+				padding-bottom: 0;
+			}
+
+			// Full width if no image
+
+			.jubilee-entry-no-image & {
+				width: 100% !important;
+			}
+
+			// Heading
+
+			h3 { // h3 is entry widget
+
+				margin-bottom: 0;
+				line-height: 1.4;
+				font-size: 1.1em !important;
+				font-weight: 500;
+				text-transform: none !important;
+
+				a {
+					//@extend .jubilee-dark;
+				}
+
+			}
+
+		}
+
+			// Meta
+
+			.jubilee-entry-compact-meta { // <ul>
+
+				@extend .jubilee-clearfix;
+
+				margin-top: ct-em(5);
+				margin-bottom: ct-em(-3) !important;
+				margin-left: ct-em(-8);
+				margin-right: ct-em(-8);
+				padding-top: ct-em(2);
+
+				> li {
+					@extend .jubilee-dark;
+					margin: ct-em(3) ct-em(8) !important;
+					display: block;
+					float: left;
+					vertical-align: top;
+					font-size: 0.9em;
+					line-height: 1.4;
+				}
+
+				a {
+					color: $text-color-dark;
+				}
+
+				// Date label
+
+				time {
+
+					position: relative;
+					top: ct-em(-1);
+					padding: ct-em(5) ct-em(10) ct-em(5);
+					line-height: 1;
+					font-size: 0.825em;
+					color: $text-color-dark;
+					text-transform: uppercase;
+					border-radius: $box-border-radius;
+
+					.jubilee-shapes-organic & {
+						border-radius: $box-border-radius-organic;
+					}
+
+					.jubilee-shapes-angled & {
+						border-radius: $box-border-radius-angled;
+					}
+
+				}
+
+			}
+
+		// Content / Excerpt
+
+		.jubilee-entry-content-compact {
+
+			margin-top: ct-em(11);
+			margin-left: ct-em(16);
+			margin-right: ct-em(5);
+			padding: 0 ct-em(16) ct-em(14) ct-em(1);
+			font-size: 0.85em;
+			line-height: 1.45;
+
+			.jubilee-entry-no-image & {
+				margin-top: ct-em(9);
+			}
+
+		}
+

@@ -1,0 +1,1237 @@
+/*---------------------------------------------
+ * Blocks
+ *--------------------------------------------*/
+
+.jubilee-block { // handy for making <span> display as block, such as in <h1> where div not allowed
+	display: block;
+}
+
+/*---------------------------------------------
+ * Text
+ *--------------------------------------------*/
+
+// Enlarged Text (used on main article content)
+
+.jubilee-enlarged {
+	font-size: $enlarged-font-size;
+}
+
+// Regular Text Color
+
+.jubilee-text-color {
+	color: $text-color;
+}
+
+// Light Text Color
+
+.jubilee-light {
+	color: $text-color-light;
+}
+
+// Dark Text Color
+
+.jubilee-dark {
+	color: $text-color-dark;
+}
+
+// Bold Text
+
+.jubilee-bold {
+	font-weight: 600; // semi-bold if available; otherwise bold
+}
+
+// Nowrap Text
+
+.jubilee-nowrap {
+	white-space: nowrap;
+}
+
+// Shadow Text
+// @extend on title over header image, section title on homepage, etc.
+
+.jubilee-text-over-image {
+	text-shadow: 0 0 15px rgba(0, 0, 0, 0.1); // imperceptible shadow to make text contrast with background image
+}
+
+// More compact entry content for comments and Text widget, etc.
+
+.jubilee-compact-content {
+
+	@extend .jubilee-entry-content;
+
+	blockquote {
+
+		// More compact
+
+		padding-top: ct-em(24);
+		padding-bottom: ct-em(24);
+		font-size: 1.3em;
+		text-align: left;
+
+		&:before {
+			position: absolute;
+			top: 0.09em;
+			left: 0.42em;
+			font-size: 3.8em;
+		}
+
+		// No shadow
+
+		box-shadow: none;
+		border: none;
+		padding-top: 0;
+		padding-bottom: 0;
+		padding-left: ct-em(40);
+		padding-right: 0;
+
+		// Quotation mark before
+
+		&:before {
+			position: absolute;
+			top: ct-em(-5);
+			left: 0;
+		}
+
+		// Paragraphs
+
+		p {
+
+			margin-top: 0;
+			margin-bottom: ct-em(11);
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+		}
+
+	}
+
+	// Reduce block margins
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-top: ct-rem(20);
+		margin-bottom: ct-rem(15);
+	}
+
+	p,
+	ul,
+	ol,
+	dl,
+	table,
+	blockquote,
+	q {
+		margin-top: ct-em(25);
+		margin-bottom: ct-em(25);
+	}
+
+	.alignnone {
+		margin-top: ct-em(25);
+		margin-bottom: ct-em(25);
+	}
+
+	p .alignnone {
+		margin-top: ct-em(6);
+		margin-bottom: ct-em(6);
+	}
+
+	.aligncenter {
+		margin-top: ct-em(35);
+		margin-bottom: ct-em(35);
+	}
+
+	// Increase caption image text
+
+	.wp-caption-text {
+		font-size: 0.9em;
+	}
+
+	// Smaller buttons
+
+	.jubilee-buttons-list {
+		font-size: 0.9em;
+	}
+
+}
+
+// Highlighted text
+
+mark {
+
+	background-color: transparent; // default
+	color: inherit;
+
+	body:not(.jubilee-no-mark) & { // mainly for CT Demo to show don't have to use <mark>
+
+	    // background: linear-gradient coloring applied in head.php
+	    background-color: transparent;
+	    box-decoration-break: clone;
+	    border-radius: 2px;
+	    color: $text-color-dark;
+
+	}
+
+}
+
+/*---------------------------------------------
+ * Images
+ *--------------------------------------------*/
+
+// Caption Image (e.g. Highlight Widget, Galleries Template)
+// Highlight is square, Gallery image is rectangular
+
+.jubilee-caption-image,
+.jubilee-caption-image-inner,
+.jubilee-caption-image-bg,
+.jubilee-caption-image-brightness,
+.jubilee-caption-image-gradient,
+.jubilee-caption-image-caption {
+
+	// Organic
+
+	.jubilee-shapes-organic &.jubilee-highlight-1n {
+		border-radius: 47% 52% 63% 36% / 57% 53% 46% 41% !important;
+	}
+
+	.jubilee-shapes-organic &.jubilee-highlight-2n {
+		border-radius: 34% 64% 51% 47% / 65% 32% 66% 37% !important;
+	}
+
+	.jubilee-shapes-organic &.jubilee-highlight-3n {
+		border-radius: 56% 44% 34% 66% / 54% 53% 48% 48% !important;
+	}
+
+	.jubilee-shapes-organic &.jubilee-highlight-4n {
+		border-radius: 42% 57% 48% 53% / 68% 52% 48% 32% !important;
+	}
+
+	// Angled
+
+	.jubilee-shapes-angled &.jubilee-highlight-1n {
+		-webkit-clip-path: polygon(0 0, 97% 0%, 100% 100%, 0% 100%);
+		clip-path: polygon(0 0, 97% 0%, 100% 100%, 0% 100%);
+	}
+
+	.jubilee-shapes-angled &.jubilee-highlight-2n {
+		-webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 3% 100%);
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 3% 100%);
+	}
+
+	.jubilee-shapes-angled &.jubilee-highlight-3n {
+		-webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
+	}
+
+	.jubilee-shapes-angled &.jubilee-highlight-4n {
+		-webkit-clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
+		clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
+	}
+
+}
+
+.jubilee-caption-image {
+
+	position: relative;
+	overflow: hidden; // prevent most lines between images (see img max-width)
+
+	a {
+		display: block; // helps with spacing, especially with regard to matchHeight
+		border: 0 !important;
+	}
+
+}
+
+	// Background if no image
+
+	.jubilee-caption-image-inner {
+
+		@extend .jubilee-bg-secondary;
+		text-align: center;
+
+		.jubilee-shapes-organic & {
+			margin-bottom: ct-em(-50) !important;
+		}
+
+	}
+
+	// Image background layer
+
+	.jubilee-caption-image-bg {
+
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+
+	}
+
+	// Brightness layer (Highlights)
+
+	.jubilee-caption-image-brightness {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+	}
+
+	// Gradient layer (Highlights)
+
+	.jubilee-caption-image-gradient {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 15%,rgba(0,0,0,0.35) 75%,rgba(0,0,0,0.35) 100%);
+	}
+
+	// Container for Title and Description
+
+	.jubilee-caption-image-caption {
+
+		$right-margin: 8%;
+
+		display: block;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 100%;
+		padding: 0 12%;
+
+		@extend .jubilee-text-over-image; // virtually imperceptible shadow for contrast
+
+	}
+
+		// Title
+
+		.jubilee-caption-image-title {
+
+			@extend .jubilee-h5;
+
+			display: block;
+			position: relative; // helps z-index kick in
+			line-height: 1.15;
+
+			&,
+			& h2 { // in widget
+				color: #fff;
+			}
+
+			.jubilee-caption-image-has-image & {
+				text-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+			}
+
+		}
+
+		// Description
+
+		.jubilee-caption-image-description {
+
+			display: block;
+			position: relative; // helps z-index kick in (in color scheme CSS)
+			margin-top: ct-em(10);
+			line-height: 1.4;
+			font-size: 1.2em;
+			font-style: normal;
+			font-weight: normal;
+			text-align: center;
+			color: #fff;
+
+			.jubilee-caption-image-has-image & {
+				text-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+			}
+
+		}
+
+// Placeholder
+
+.jubilee-placeholder {
+
+	&:not(.jubilee-show-placeholder) {
+		display: none;
+	}
+
+}
+
+/*---------------------------------------------
+ * Highlights Content (holds caption images)
+ *--------------------------------------------*/
+
+// Content (used by Homepage and Galleries template)
+
+.jubilee-highlights-content {
+
+	//border: 1px solid red;
+	@extend .jubilee-centered-large;
+	@extend .jubilee-clearfix;
+
+	padding-top: ct-em(10); // extra for jubilee-vertical-padding-medium above
+	padding-bottom: ct-em(10); // extra for jubilee-vertical-padding-medium above
+	font-size: 0.8em;
+
+	h2 {
+		@extend .jubilee-h3;
+		@extend .jubilee-vertical-margin-bottom-small;
+		margin-top: 0;
+		margin-bottom: 0 !important;
+		font-size: 1.9em;
+	}
+
+}
+
+// Columns
+
+.jubilee-highlights-four-columns { // .jubilee-highlights-content
+	@include jubilee-highlights-four-columns();
+}
+
+.jubilee-highlights-three-columns {
+	@include jubilee-highlights-three-columns();
+}
+
+.jubilee-highlights-two-columns {
+	@include jubilee-highlights-two-columns();
+}
+
+.jubilee-highlights-one-column {
+	@include jubilee-highlights-one-column();
+}
+
+/*---------------------------------------------
+ * Icons
+ *--------------------------------------------*/
+
+// List Icons
+
+.jubilee-list-icons { // ul
+
+	$margin-vertical: 1;
+	$margin-horizontal: 0;
+
+	list-style: none;
+	margin: ct-em(-$margin-vertical) ct-em(-$margin-horizontal) !important;
+	padding: 0;
+
+	li {
+
+		display: inline-block;
+		margin: ct-em($margin-vertical) ct-em($margin-horizontal);
+		line-height: 0;
+
+		a {
+			color: $text-color-dark;
+		}
+
+		// Adjustments
+
+		.mdi-microphone,
+		.mdi-google-play {
+			font-size: 0.95em;
+		}
+
+		.mdi-microphone,
+		.mdi-pinterest,
+		.mdi-vine,
+		.mdi-rss {
+			margin-left: ct-em(-2);
+			margin-right: ct-em(-2);
+		}
+
+		.mdi-apple,
+		.mdi-vimeo {
+			margin-left: ct-em(-1);
+			margin-right: ct-em(-1);
+		}
+
+	}
+
+}
+
+/*---------------------------------------------
+ * Buttons
+ *--------------------------------------------*/
+
+// Button Shared (Single + List)
+
+.jubilee-button,
+.jubilee-buttons-list a,
+.jubilee-menu-button > a,
+input[type=submit],
+.jubilee-nav-left-right a,
+.wp-block-file .wp-block-file__button {
+
+	//$button-padding: ct-em(12);
+	$button-padding: ct-em(24);
+	$button-border-rgb: 50;
+	$button-border-rgb-alpa: 0.25;
+	$button-border-rgb-alpa-light: 0.18;
+
+	display: inline-block;
+	position: relative;
+	top: 0;
+	height: $button-height;
+	line-height: $button-height - ct-em(2.5);
+	padding: 0 $button-padding;
+	font-size: $button-font-size;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 0;
+	white-space: nowrap;
+	color: #fff;
+	border-radius: $button-radius;
+	border-style: solid;
+	border-width: 2px;
+	border-color: transparent;
+	text-transform: uppercase;
+	box-shadow: 0 5px 20px rgba( 36, 22, 6, 0.20 );
+
+	// Radius for different shapes.
+
+	.jubilee-shapes-square & {
+		border-radius: $button-radius-square;
+	}
+
+	.jubilee-shapes-angled & {
+		border-radius: $button-radius-angled;
+	}
+
+	// Light / Hover
+
+	transition: all 0.2s ease-out; // for hover effect
+	transform: perspective(1px) translateZ(0);
+
+	&:not(.jubilee-button-secondary):not(.tag-cloud-link):hover,
+	&:not(.jubilee-button-secondary):not(.tag-cloud-link):focus,
+	&:not(.jubilee-button-secondary):not(.tag-cloud-link):active {
+		color: #fff !important;
+		transform: translateY(-4px);
+	}
+
+	&.jubilee-button-secondary {
+		background-color: transparent;
+		border-color: #000;
+		box-shadow: none;
+		//color: #000 !important;
+		position: relative;
+		top: 1px;
+	}
+
+	// Icon Button
+
+	.jubilee-icon {
+		font-size: 1.15em;
+		padding-right: ct-em(3.5);
+		position: relative;
+		top: ct-em(1.5);
+		margin-left: ct-em(-1);
+	}
+
+	// Icon Adjustments
+
+	.jubilee-icon-nav-button-left {
+		margin-left: ct-em(-4);
+		padding-right: ct-em(2);
+	}
+
+	.jubilee-icon-nav-button-right {
+		margin-right: ct-em(-8);
+		padding-left: ct-em(3);
+	}
+
+	.jubilee-icon-download {
+		padding-right: ct-em(2.5);
+	}
+
+	.jubilee-icon-comment-reply {
+		font-size: 1.1em;
+	}
+
+	.jubilee-icon-comment-edit {
+		font-size: 1.1em;
+	}
+
+	// Large
+
+	&.jubilee-button-large {
+		font-size: 1.2em;
+	}
+
+	&.jubilee-button-block {
+
+		margin-top: 0.4em;
+		margin-bottom: 0.4em;
+		margin-right: 0.8em;
+
+		&:last-child {
+			margin-right: 0;
+		}
+
+	}
+
+	// Alignment
+
+	&.alignleft {
+		margin: 0.7em 1.75em 0.7em 0;
+	}
+
+	&.alignright {
+		margin: 0.7em 0 0.7em 1.5em;
+	}
+
+	&.aligncenter {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 320px;
+	}
+
+}
+
+.jubilee-menu-button > a {
+	background-color: transparent;
+	border-color: #000;
+	box-shadow: none;
+	position: relative;
+	top: 1px;
+}
+
+// Buttons List
+
+.jubilee-buttons-list { // ul
+
+	margin: 0 (-$button-margin-half) (-$button-margin) (-$button-margin-half);
+	padding: 0;
+	list-style: none;
+
+	li {
+		display: inline-block;
+		margin: 0 $button-margin-half $button-margin $button-margin-half;
+	}
+
+	&.jubilee-buttons-list-close {
+
+		margin: 0 (-$button-margin-half / 2) (-$button-margin / 2) (-$button-margin-half / 2);
+
+		li { // closer spacing (half)
+			margin: 0 ($button-margin-half / 2) ($button-margin / 2) ($button-margin-half / 2);
+		}
+
+	}
+
+	// Large
+
+	&.jubilee-buttons-list-large {
+		font-size: 1.25em;
+	}
+
+}
+
+/*---------------------------------------------
+ * Lists
+ *--------------------------------------------*/
+
+// List Items
+// Used by CT Categories widget (extended) and Sermon topics, speakers, etc. archives
+// ie. content generated by wp_list_categories()
+// main.js moves count into span tag so it can be styled
+
+.jubilee-list {
+
+	$top-level-margin: ct-em(6);
+	$sub-level-margin: ct-em(4);
+
+	margin: 0;
+	margin-bottom: (-$top-level-margin) !important;
+	list-style: none;
+	line-height: 1.3;
+
+	// Hide list until main.js moves count into span, to avoid flicker
+
+	.js & {
+		visibility: hidden;
+	}
+
+	// Second and third level margins
+
+	ul {
+		margin-top: $sub-level-margin;
+		margin-left: ct-em(12);
+	}
+
+	// Top-level Item
+
+	> li {
+
+		padding-bottom: $top-level-margin;
+		-webkit-column-break-inside: avoid;
+		page-break-inside: avoid;
+		break-inside: avoid;
+
+		& > a {
+			@include jubilee-uppercase();
+			font-weight: bold;
+		}
+
+	}
+
+	// All Items
+
+	li {
+
+		position: relative;
+		list-style: none;
+
+		// Second level or deeper
+
+		li {
+
+			// Less margin
+
+			margin-bottom: $sub-level-margin;
+
+			// Second-level links smaller
+
+			a {
+				font-size: 1em;
+			}
+
+			// Third and deeper italic
+
+			li {
+				font-style: italic;
+			}
+
+		}
+
+	}
+
+	// Make room for count so wrapping is nice
+
+	> li {
+		padding-right: ct-em(30);
+	}
+
+}
+
+	// List Items Count
+
+	.jubilee-list-item-count { // class added and ( ) removed by JavaScript
+
+		position: absolute;
+		top: ct-em(1);
+		right: 0;
+		font-size: 0.9em;
+		font-style: normal;
+
+		li li & {
+			right: ct-em(-33);
+		}
+
+	}
+
+/*---------------------------------------------
+ * Navigation
+ *--------------------------------------------*/
+
+// Prev/Next Nav Blocks (Single Post)
+
+.jubilee-nav-blocks {
+
+	@extend .jubilee-vertical-margin-large;
+	@extend .jubilee-no-viewport-padding; // make it fit 100% to viewport on smaller screens
+
+	width: 90%;
+	max-width: 1170px;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	z-index: 0 !important; // under map section when no comments or widgets
+	overflow: hidden;
+
+	// Square shape - Make single post nav flush with bottom when no comments section shown
+
+	.jubilee-shapes-square .jubilee-has-nav-blocks.jubilee-no-comments-section & {
+		margin-bottom: 0;
+	}
+
+}
+
+	.jubilee-nav-block {
+
+		position: relative;
+		display: inline-block;
+		width: 48%;
+		padding-bottom: ( 25% / 2 ); // ratio for 1600x400 banners (divided by 2 because width is 50%)
+		cursor: pointer;
+
+		&.jubilee-nav-block-empty {
+			display: none;
+		}
+
+		overflow: hidden;
+
+	}
+
+		// Shape.
+
+		.jubilee-nav-block-image,
+		.jubilee-nav-block-content {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.jubilee-nav-block,
+		.jubilee-nav-block-image {
+
+			border-radius: $box-border-radius;
+
+			.jubilee-shapes-organic & {
+				border-radius: ct-em(100);
+			}
+
+			.jubilee-shapes-angled & {
+				border-radius: $box-border-radius-angled;
+			}
+
+		}
+
+		.jubilee-nav-blocks-shape:not(.jubilee-show-shape) {
+			display: none;
+		}
+
+		.jubilee-shapes-angled .jubilee-nav-blocks-shape {
+
+			position: absolute;
+			bottom: -1px; // cover extra line at bottom on HiDPI at some viewport widths
+			right: 0;
+			width: 105%;
+			height: 1.2vw;
+			z-index: 1;
+
+			polygon {
+				fill: $bg-color;
+			}
+
+		}
+
+		// Image.
+
+		.jubilee-nav-block-image {
+			width: 101%;
+			background-size: cover;
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
+
+			.jubilee-nav-block-image-brightness {
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #000;
+			}
+
+		.jubilee-nav-block-content {
+			z-index: 2; // above image
+			padding: 0 10%;
+		}
+
+			.jubilee-nav-block-content-columns {
+				display: table;
+				height: 100%;
+				width: 100%;
+			}
+
+				.jubilee-nav-block-content-column {
+					display: table-cell;
+					height: 100%;
+					vertical-align: middle;
+					text-align: center;
+				}
+
+				.jubilee-nav-block-content-arrow {
+
+ 					@extend .jubilee-text-over-image; // imperceptible shadow to make text contrast with background image
+
+					position: absolute;
+					top: 44%; // Fallback for old versions Android without calc()
+					top: calc( 50% - 26px );
+					font-size: 36px;
+
+					&.jubilee-nav-block-content-left {
+						left: 5%;
+					}
+
+					&.jubilee-nav-block-content-right {
+						right: 5%;
+					}
+
+				}
+
+				.jubilee-nav-block-content-text {
+
+					max-width: 450px;
+					line-height: 1.2;
+
+					$padding: 1.5em;
+
+					&.jubilee-nav-block-content-right {
+						padding-left: $padding;
+					}
+
+					&.jubilee-nav-block-content-left {
+						padding-right: $padding;
+					}
+
+					* {
+	 					@extend .jubilee-text-over-image; // imperceptible shadow to make text contrast with background image
+					}
+
+					.jubilee-shapes-angled & {
+						padding-bottom: ct-em(10);
+					}
+
+				}
+
+					.jubilee-nav-block-label {
+						padding-bottom: ct-em(2);
+						text-transform: none;
+						font-size: 0.9em;
+						//font-style: italic;
+					}
+
+					.jubilee-nav-block-title {
+
+						@extend h5;
+						@include jubilee-uppercase();
+
+						&:hover {
+							color: #fff !important;
+						}
+
+					}
+
+	.jubilee-nav-block-left {
+		float: left;
+	}
+
+	.jubilee-nav-block-right {
+		float: right;
+	}
+
+	.jubilee-nav-blocks:not(.jubilee-nav-block-has-both) {
+
+		display: block;
+
+		.jubilee-nav-block-left,
+		.jubilee-nav-block-right {
+
+			float: none;
+			margin: 0 auto;
+			display: block;
+
+			&.jubilee-nav-block-empty {
+				display: none;
+			}
+
+		}
+
+	}
+
+// Prev/Next Nav Buttons (Comments and Attachments)
+
+.jubilee-nav-left-right {
+	@extend .jubilee-clearfix;
+}
+
+	.jubilee-nav-left { // use in .jubilee-nav-left-right
+		float: left;
+		width: 50%;
+		max-width: 100%;
+	}
+
+	// Next / Newer
+
+	.jubilee-nav-right {
+		@extend .jubilee-nav-left;
+		float: right;
+		text-align: right;
+	}
+
+// Post Page Numbers ( << 1 2 3 >> below loops)
+
+.jubilee-pagination {
+	@extend .jubilee-vertical-margin-top-medium;
+	@extend .jubilee-clearfix;
+	position: relative; // keep numbers showing
+}
+
+	ul.page-numbers { // WordPress-provided class; see .jubilee-button class
+
+		margin: 0;
+		list-style: none;
+		font-size: 1.25em;
+		text-align: center;
+
+		li {
+
+			margin: ct-em(4);
+			display: inline-block;
+
+			 > * {
+				padding: 0;
+				font-weight: bold;
+			}
+
+		}
+
+		span {
+
+			&.current {
+				color: $text-color-dark;
+			}
+
+			&.dots {
+				width: auto;
+				padding: 0;
+				border: none;
+				color: $text-color;
+			}
+
+		}
+
+		.jubilee-icon {
+			position: relative;
+			top: ct-em(2);
+			font-size: 1.35em;
+		}
+
+		.jubilee-icon-nav-links-left {
+			margin-left: ct-em(3);
+		}
+
+		.jubilee-icon-nav-links-right {
+			padding-left: 0;
+		}
+
+	}
+
+/*---------------------------------------------
+ * Author Box
+ *--------------------------------------------*/
+
+// Used below blog posts and author archive
+
+.jubilee-author-box {
+
+	@include jubilee-box();
+
+	position: relative;
+	top: ct-em(-5);
+	min-height: $author-box-avatar-size + 5em;
+	padding: ct-em(40);
+	padding-bottom: ct-em(35) !important;
+
+	.jubilee-shapes-organic & {
+		border-radius: $box-border-radius-organic;
+	}
+
+	.jubilee-shapes-angled & {
+		border-radius: $box-border-radius-angled;
+	}
+
+	body:not(.single) & {
+		font-size: 1em !important;
+	}
+
+	// Margin on top of viewing single post (not in archive, where box appears at top)
+
+	.single & {
+		@extend .jubilee-vertical-margin-top-large;
+	}
+
+	.archive.author & {
+		padding-bottom: ct-em(10); // a little extra space
+	}
+
+	// Archive (at top)
+
+	.archive & {
+		min-height: $author-box-avatar-size + 0.5em;
+	}
+
+}
+
+	.jubilee-author-avatar {
+
+		position: absolute;
+		width: $author-box-avatar-size;
+		height: $author-box-avatar-size;
+
+		.single & {
+			left: ct-em(40);
+		}
+
+		img {
+
+			max-width: 100%;
+			height: auto;
+			border-radius: $box-border-radius;
+
+			.jubilee-shapes-organic & {
+				border-radius: ct-em(80);
+			}
+
+			.jubilee-shapes-angled & {
+				border-radius: $box-border-radius-angled;
+			}
+
+		}
+
+	}
+
+	.jubilee-author-content {
+
+		margin-left: $author-box-avatar-size + 2.4em;
+
+		header {
+			min-height: ct-em(42);
+		}
+
+			h2 {
+
+				display: inline-block;
+				margin: ct-em(-5) ct-em(30) 0 0;
+				vertical-align: middle;
+
+				// Prevent long name from bumping "More Posts" button down
+
+				.jubilee-author-box-show-button & {
+					width: calc( 100% - #{ct-em(110)} ); // room for button
+				}
+
+			}
+
+	}
+
+		// Button
+
+		.jubilee-author-box-archive {
+			position: relative;
+			top: ct-em(-8);
+			vertical-align: middle;
+			float: right;
+			font-size: 0.9em;
+		}
+
+		.jubilee-author-bio {
+
+			margin-top: ct-em(14);
+
+			p:first-child {
+				margin-top: 0;
+			}
+
+			p:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+/*---------------------------------------------
+ * Search Form
+ *--------------------------------------------*/
+
+// Search Form Shared Styles (Header, Widget, etc.)
+
+.jubilee-search-form form {
+
+	margin: 0;
+	white-space: nowrap;
+
+	> * {
+		display: inline-block;
+		margin-left: ct-em(4);
+		vertical-align: middle;
+	}
+
+	> *:first-child {
+		margin-left: 0;
+	}
+
+	input[type=text] {
+		width: ct-em(220);
+	}
+
+}
+
+/*---------------------------------------------
+ * Visibility
+ *--------------------------------------------*/
+
+// Hidden
+
+.jubilee-hidden {
+	display: none;
+}
+
+// Hidden but active element (e.g. hidden submit)
+
+.jubilee-invisible {
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	left: 30000px;
+}
+
+// Text meant only for screen readers (required, Theme Check)
+
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 2px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
+}
+
+/*---------------------------------------------
+ * Clearfix
+ *--------------------------------------------*/
+
+.jubilee-clearfix:before,
+.jubilee-clearfix:after {
+  content: "";
+  display: table;
+}
+
+.jubilee-clearfix:after {
+  clear: both;
+}

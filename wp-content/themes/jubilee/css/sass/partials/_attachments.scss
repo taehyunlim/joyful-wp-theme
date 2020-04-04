@@ -1,0 +1,47 @@
+
+.attachment {
+
+	& .jubilee-entry-full > *:last-child {
+		margin-bottom: 0;
+	}
+
+	.jubilee-entry-content {
+		@extend .jubilee-vertical-margin-top-medium;
+	}
+
+	// Back button max 100%  and centered since there is none on right
+
+	.jubilee-nav-left-right {
+		@extend .jubilee-vertical-margin-top-medium;
+	}
+
+		.jubilee-nav-left { // use in .jubilee-nav-left-right
+			width: 100%;
+			position: relative;
+			top: -5px;
+			text-align: center;
+		}
+
+}
+
+.jubilee-attachment-image {
+
+	@extend .jubilee-vertical-margin-bottom-medium;
+	@extend .jubilee-enlarged; // make caption as big as if was in content area
+
+	.wp-caption {
+		max-width: none;
+		margin: 0;
+	}
+
+	.wp-caption-text {
+		@extend .jubilee-centered-small;
+		margin-top: ct-em(15);
+	}
+
+}
+
+.jubilee-attachment-button {
+	@extend .jubilee-vertical-margin-top-small;
+	text-align: center;
+}

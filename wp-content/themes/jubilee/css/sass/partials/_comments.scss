@@ -1,0 +1,352 @@
+
+/*---------------------------------------------
+ * Comments Section
+ *--------------------------------------------*/
+
+#comments { // Note: #comments is hardcoded in WP core comments_popup_link(), so no prefix
+	@extend .jubilee-vertical-margin-top-large;
+}
+
+	#jubilee-comments-header {
+		@extend .jubilee-vertical-margin-bottom-medium;
+	}
+
+		#jubilee-comments-title {
+			@extend h1;
+			text-align: center;
+		}
+
+/*---------------------------------------------
+ * Comment List
+ *--------------------------------------------*/
+
+.jubilee-comments, // <ol>
+.jubilee-comments ul.children {
+	margin: 0;
+	list-style: none;
+}
+
+	// Comment or Trackback/Pingback Item
+
+	.jubilee-comment {
+		@extend .jubilee-vertical-margin-top-medium;
+		@extend .jubilee-compact-content;
+	}
+
+		// Comment Meta (Header)
+
+		.jubilee-comment-meta { // <header>
+			min-height: $comment-image-size;
+		}
+
+			// Avatar Container
+
+			.jubilee-comment-avatar {
+
+				margin-right: ct-em(20);
+				float: left;
+
+				img {
+
+					width: $comment-image-size;
+					height: $comment-image-size;
+					border-radius: $box-border-radius;
+
+					.jubilee-shapes-organic & {
+						border-radius: ct-em(40);
+					}
+
+					.jubilee-shapes-angled & {
+						border-radius: $image-border-radius-angled;
+					}
+
+				}
+
+			}
+
+			// Comment Title <h3>
+			// Comment Author or Trackback
+
+			.jubilee-comment-title {
+
+				margin: 0 !important;
+				padding-top: ct-em(3);
+				font-size: 1.15em;
+				font-weight: normal;
+				color: $text-color-dark !important;
+				text-transform: none !important;
+
+				span {
+					margin-left: ct-em(6);
+					font-size: 0.9em;
+					//font-style: italic;
+					font-weight: normal;
+					color: $text-color-light;
+				}
+
+			}
+
+			// Date
+
+			.jubilee-comment-meta {
+
+				time {
+
+					display: inline-block;
+					margin-top: ct-em(10);
+					padding: ct-em(8) ct-em(14);
+					border-radius: $label-border-radius;
+					line-height: 1.1;
+					font-size: 0.7em;
+					font-weight: normal;
+					color: $text-color-dark;
+					text-transform: uppercase;
+
+					.jubilee-shapes-organic & {
+						border-radius: $label-border-radius-organic;
+					}
+
+					.jubilee-shapes-angled & {
+						border-radius: $label-border-radius-angled;
+					}
+
+				}
+
+				// Remove underline from linked date
+
+				> a {
+					border: 0 !important;
+				}
+
+			}
+
+				.jubilee-comment-time {
+					margin-left: ct-em(8);
+					font-style: italic;
+				}
+
+			// Buttons
+
+			.jubilee-comment-buttons { // .jubilee-buttons-list
+
+				float: right;
+				position: relative;
+				margin-left: ct-em(20);
+				top: ct-em(-25);
+
+				li a {
+					line-height: 2.95 !important;
+				}
+
+			}
+
+		// Comment Content
+
+		.jubilee-comment-content {
+			margin-top: ct-em(28);
+		}
+
+		// Moderation Note
+
+		.jubilee-comment-moderation {
+			@extend .jubilee-dark;
+		}
+
+		// Indentations
+
+		.jubilee-comment,
+		.jubilee-comment #respond {
+			margin-left: 6%;
+		}
+
+		.jubilee-comment.depth-1 { // first level flush left
+			margin-left: 0;
+		}
+
+	// Post author
+
+	.single-post .bypostauthor > article { // blog posts only
+
+		@extend .jubilee-bg-secondary;
+		padding: ct-em(35) ct-em(40);
+		border-radius: $box-border-radius;
+
+		.jubilee-shapes-organic & {
+			border-radius: $box-border-radius-organic;
+		}
+
+		.jubilee-shapes-angled & {
+			border-radius: $box-border-radius-angled;
+		}
+
+	}
+
+// Comment navigation
+
+#jubilee-comment-nav { // .jubilee-nav-left-right
+	@extend .jubilee-vertical-margin-top-medium;
+}
+
+/*---------------------------------------------
+ * Comment Form
+ *--------------------------------------------*/
+
+// Comment Form
+
+#respond { // hard coded by WP
+
+	position: relative;
+	top: ct-em(-8);
+	@extend .jubilee-vertical-margin-top-medium;
+	padding-bottom: ct-em(8);
+
+	li:not(:last-child) & {
+		@extend .jubilee-vertical-margin-bottom-medium;
+	}
+
+}
+
+	// Title
+
+	#reply-title {
+		@extend .jubilee-h2;
+	}
+
+	// Cancel Reply Link
+
+	#cancel-comment-reply-link { // this is within #reply-title heading so here we give it regular font
+		position: relative;
+		bottom: ct-em(5);
+		margin-left: ct-em(25);
+		font-size: 0.6em;
+		font-weight: normal !important;
+		text-transform: none !important;
+	}
+
+	// Message above form
+
+	#respond .comment-notes,
+	#respond .logged-in-as {
+		@extend .jubilee-vertical-margin-bottom-small;
+	}
+
+	// Text Inputs
+
+	.comment-form-author,
+	.comment-form-email,
+	.comment-form-url {
+		position: relative;
+		margin: ct-em(35) 0;
+	}
+
+		#respond {
+
+			label {
+
+				line-height: 36px;
+				font-size: 0.95em;
+				font-weight: normal;
+				color: $text-color-dark;
+
+				@include jubilee-uppercase();
+
+				&.error {
+					//font-style: italic;
+					text-transform: none;
+					color: $text-color-error;
+				}
+
+			}
+
+			.comment-form-cookies-consent {
+
+				label {
+					text-transform: none;
+					font-size: 1em;
+					font-weight: normal;
+					line-height: 1.4;
+					padding-left: 4px;
+					color: $text-color;
+				}
+
+			}
+
+		}
+
+		.comment-form-comment label {
+			display: none;
+		}
+
+
+		#respond input[type=text],
+		#respond input[type=email],
+		#respond input[type=url] {
+			position: absolute;
+			left: 90px;
+			width: 260px;
+		}
+
+	// Comment Field
+
+	.comment-form-comment {
+
+		clear: left;
+
+		textarea {
+			width: 95%;
+		}
+
+	}
+
+	// Error Messages
+
+	#respond label.error {
+		@extend .jubilee-dark;
+		font-weight: normal;
+	}
+
+		// Error Message for Name, Email, URL after input
+
+		.comment-form-author label.error,
+		.comment-form-email label.error,
+		.comment-form-url label.error {
+			position: absolute;
+			left: 375px;
+			white-space: nowrap;
+		}
+
+		// Error Message for Comment
+
+		p.comment-form-comment label.error {
+			position: relative;
+			top: 0;
+			display: block;
+		}
+
+	// Allowed tags note
+
+	.form-allowed-tags {
+		display: none;
+	}
+
+	// Submit Button
+
+	#respond .form-submit {
+
+		margin-top: 1.6em;
+
+		.logged-in & {
+			margin-top: 0 !important;
+		}
+
+		margin-bottom: ct-em(10); // ensure enough room for shadow
+
+	}
+
+// Comments closed message (in place of add form if comments have already been made)
+
+#jubilee-comments-closed {
+	@extend .jubilee-vertical-margin-top-medium;
+	@extend .jubilee-dark;
+	font-style: normal;
+}
