@@ -16,35 +16,35 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Enqueue stylesheets
  */
-function jubilee_joyful_enqueue_styles() {
+function jubilee_child_enqueue_styles() {
 
 	// Enqueue parent theme stylesheet
 	// It is no longer best practice to use @import in style.css so this is how we do it instead
-	wp_enqueue_style( 'jubilee-style', CTFW_THEME_URL . '/style.css', false, CTFW_THEME_VERSION );
+	wp_enqueue_style( 'parent-theme', get_template_directory_uri() . '/style.css', false, CTFW_THEME_VERSION );
 
 	// Enqueue child theme stylesheet
 	// The 'jubilee-style' dependency ensures child theme stylesheet loads after parent
-	wp_enqueue_style( 'jubilee-joyful-style', CTFW_THEME_CHILD_URL . '/style.css', array( 'jubilee-style' ), CTFW_THEME_VERSION );
+	wp_enqueue_style( 'child-theme', get_stylesheet_directory_uri() . '/style.css', array( 'parent-theme' ), CTFW_THEME_VERSION );
 
 	// You can enqueue more from your child theme here
 
 }
 
-add_action( 'wp_enqueue_scripts', 'jubilee_joyful_enqueue_styles' ); // front-end only
+add_action( 'wp_enqueue_scripts', 'jubilee_child_enqueue_styles' ); // front-end only
 
 /**
  * Enqueue JavaScript files
  */
-function jubilee_joyful_enqueue_scripts() {
+function jubilee_child_enqueue_scripts() {
 
 	// Enqueue child theme JavaScript
-	//wp_enqueue_script( 'jubilee-joyful-script', CTFW_THEME_CHILD_URL . '/new-script.js', false, CTFW_THEME_VERSION );
+	//wp_enqueue_script( 'jubilee-child-script', CTFW_THEME_CHILD_URL . '/new-script.js', false, CTFW_THEME_VERSION );
 
 	// You can enqueue more from your child theme here
 
 }
 
-//add_action( 'wp_enqueue_scripts', 'jubilee_joyful_enqueue_scripts' ); // front-end only
+//add_action( 'wp_enqueue_scripts', 'jubilee_child_enqueue_scripts' ); // front-end only
 
 /**
  * Change theme features, actions, filters, etc.
@@ -52,12 +52,12 @@ function jubilee_joyful_enqueue_scripts() {
  * Perform setup on after_setup_theme hook.
  * Default priority is 10 so 11 ensures this to run after the parent theme's setup
  */
-function jubilee_joyful_setup() {
+function jubilee_child_setup() {
 
 	// Load child theme language file
 	// This will cause $locale.mo (e.g. en_US.mo) in the child theme's directory to load.
-	// Optionally, it can go in wp-content/languages/themes/jubilee-joyful-$locale.mo.
-	//load_child_theme_textdomain( 'jubilee-joyful' ); // use your own textdomain
+	// Optionally, it can go in wp-content/languages/themes/jubilee-child-$locale.mo.
+	//load_child_theme_textdomain( 'jubilee-child' ); // use your own textdomain
 
 	// Example of removing a function that is hooked
 	// remove_action() works similarly
@@ -76,4 +76,4 @@ function jubilee_joyful_setup() {
 
 }
 
-//add_action( 'after_setup_theme', 'jubilee_joyful_setup', 11 );
+//add_action( 'after_setup_theme', 'jubilee_child_setup', 11 );

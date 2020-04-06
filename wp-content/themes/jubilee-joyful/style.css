@@ -13,3 +13,103 @@ To override styles, copy them here from the original stylesheet, then change the
 See http://churchthemes.com/guides/developer/child-theming/ and the WordPress Codex:
 http://codex.wordpress.org/Child_Themes
 */
+
+/*---------------------------------------------
+ * Header Bar
+ *--------------------------------------------*/
+
+#jubilee-header-top-bg {
+	background: white !important;
+}
+
+/*---------------------------------------------
+ * Header Menu (Dropdowns)
+ *--------------------------------------------*/
+
+#jubilee-header-menu-content > li:not(.jubilee-menu-button) > a {
+	margin-bottom: -20px !important;
+	padding-bottom: 24px;
+	font-size: 0.95em;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #2f3133;
+}
+
+/*---------------------------------------------
+ * Home Section
+ *--------------------------------------------*/
+
+.jubilee-home-section:first-child,
+#jubilee-home-section-1 {
+	margin: 0 !important;
+	padding-top: 8px !important;
+}
+
+.jubilee-home-section:nth-child(2),
+#jubilee-home-section-2 {
+	margin: 0 !important;
+}
+
+.jubilee-home-section:nth-child(2),
+#jubilee-home-section-2 .jubilee-image-section.jubilee-image-section-has-image {
+	height: 1em !important;
+}
+
+body:not(.jubilee-no-mark) mark {
+	background: linear-gradient(180deg, transparent 55%, #ffc151 40%) !important;
+}
+
+#jubilee-header-top-inner {
+	min-height: 4em !important;
+	height: 4em !important;
+}
+
+.jubilee-custom-section-inner {
+	text-align: center !important;
+}
+
+#jubilee-logo-image img {
+	max-height: 2em;
+}
+
+@media only screen and (min-width: 1400px) {
+	.jubilee-joyful-section-image {
+		background-size: contain !important;
+	}
+}
+
+#jubilee-home-section-1 h1,
+h2 {
+	font-size: 2.75em;
+	font-weight: normal;
+	color: #eee;
+}
+
+#jubilee-home-section-1 .jubilee-custom-section-text {
+	color: #eee !important;
+}
+
+#jubilee-home-section-1 .jubilee-button {
+	height: 2.6em;
+	line-height: 2.44375em;
+	min-width: 10em;
+	border-radius: 2em !important;
+}
+
+/*---------------------------------------------
+ * Custom Section
+ *--------------------------------------------*/
+/* 
+.jubilee-custom-section-content h1,
+.jubilee-custom-section-content .jubilee-h1,
+.jubilee-custom-section-content #jubilee-comments-title {
+	font-size: 2.75em;
+	letter-spacing: -0.03125em;
+	color: #eee;
+}
+.jubilee-custom-section-content h2,
+.jubilee-custom-section-content .jubilee-h2,
+.jubilee-custom-section-content #reply-title {
+	font-size: 3.2em;
+	letter-spacing: -0.03125em;
+} */

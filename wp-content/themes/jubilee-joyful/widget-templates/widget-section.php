@@ -123,9 +123,14 @@ if ( ! $is_first_widget ) {
 ?> <?php echo jubilee_homepage_section_id_attr(); ?>>
 
 	<?php if ( $image_url ) : ?>
-		<div class="jubilee-image-section-image jubilee-image-section-overlay <?php echo $overlay_class; ?>"></div>
-		<div class="jubilee-image-section-image" style="<?php echo jubilee_colorization_style( $image_url ); ?>"></div>
+		<!-- <div class="jubilee-image-section-image jubilee-image-section-overlay <?php echo $overlay_class; ?>"></div>
+		<div class="jubilee-image-section-image" style="<?php echo jubilee_colorization_style( $image_url ); ?>"></div> -->
 	<?php endif; ?>
+	<div class="jubilee-joyful-section-image jubilee-image-section jubilee-custom-section jubilee-section-image-odd jubilee-image-section-has-image"
+		<?php if ( $image_url ) : ?>
+			style="background-image: url(http://joyful.localhost/wp-content/uploads/2020/03/Background.png); background-size: cover; background-repeat: no-repeat; background-position: center center; background-attachment: fixed; min-height: 70vh;"
+		<?php endif; ?>
+	>
 
 	<div class="jubilee-image-section-content jubilee-custom-section-inner jubilee-centered-large">
 
@@ -168,6 +173,7 @@ if ( ! $is_first_widget ) {
 
 		</div>
 
+	</div>
 	</div>
 
 	<?php if ( 'horizontal' === $instance['orientation'] ) : ?>
