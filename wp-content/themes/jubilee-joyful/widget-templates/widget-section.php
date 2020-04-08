@@ -128,7 +128,7 @@ if ( ! $is_first_widget ) {
 	<?php endif; ?>
 	<div class="jubilee-joyful-section-image jubilee-image-section jubilee-custom-section jubilee-section-image-odd jubilee-image-section-has-image"
 		<?php if ( $image_url ) : ?>
-			style="background-image: url(http://joyful.localhost/wp-content/uploads/2020/03/Background.png); background-size: cover; background-repeat: no-repeat; background-position: center center; background-attachment: fixed; min-height: 70vh;"
+			style="background-image: url(<?php echo $image_url; ?>); background-size: cover; background-repeat: no-repeat; background-position: center center; background-attachment: fixed; min-height: 70vh;"
 		<?php endif; ?>
 	>
 
